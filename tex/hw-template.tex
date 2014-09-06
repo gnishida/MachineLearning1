@@ -1,0 +1,105 @@
+\input{mlClassDefs.tex}
+
+\oddsidemargin 0in
+\evensidemargin 0in
+\textwidth 6.5in
+\topmargin -0.5in
+\textheight 9.0in
+
+\begin{document}
+
+\solution{Gen Nishida}{\today}{1}{Fall 2014}
+% Fill in the above, for example, as follows:
+% \solution{John Smith}{\today}{1}{Fall 2014}
+
+\pagestyle{myheadings}  % Leave this command alone
+
+\section{Review Questions}
+
+\begin{enumerate}
+\item Assume the ... 
+\begin{itemize}
+\item What is the ...
+\[
+(1-\lambda)^k \lambda
+\]
+\item What is the expected ...\\
+Let $k$ be the number of tosses needed to get the first head. Then the expected number of $k$ is defined by
+\begin{eqnarray}
+E[k]&=&\lambda \times 1 + (1-\lambda) \lambda \times 2 + (1-\lambda)^2 \lambda \times 2 + \cdots\\
+(1-\lambda)E[k]&=&(1-\lambda)\lambda + (1-\lambda)^2 \lambda \times 2 + (1-\lambda)^3 \lambda \times 3 + \cdots
+\end{eqnarray}
+By subtracting (2) from (1), we get
+\begin{eqnarray*}
+\lambda E[k] &=& \lambda + (1-\lambda) \lambda + (1-\lambda)^2 \lambda + (1-\lambda)^3 \lambda + \cdots\\
+ &=&\lambda \frac{1}{1 - (1 - \lambda)}\\
+ &=&1 .
+\end{eqnarray*}
+Thus, $E[k]=1 / \lambda $.
+\end{itemize}
+
+\item Answer to problem 2
+
+\begin{itemize}
+\item What is the partial ...
+\[
+\frac{\partial f}{\partial x}=6x-y-11,\:\:  \frac{\partial f}{\partial y}=2y - x
+\]
+\item Find a point ...
+\[
+\left\{
+\begin{array}{l}
+6x-y-11=0 \\
+2y-x=0
+\end{array}
+\right.
+\]
+By solving these equations, we get $(x, y)=(2, 1)$.
+\end{itemize}
+
+\item Answer to problem 3
+\begin{itemize}
+\item Assume that
+The hyperplane has it normal vector $\omega$, and it is away from the origin by $-b/\|\omega\|$. The example of a hyperplane for $n=2$ and $n=3$ is in Figure 1.
+
+\item Assume we have two
+\[
+\left|\frac{-b_1}{\|\omega\|}-\frac{-b_2}{\|\omega\|}\right|=\frac{|b_1-b_2|}{\|\omega\|}
+\]
+\end{itemize}
+\end{enumerate}
+
+\section{Basic Concepts}
+\begin{enumerate}
+\item Define in one sentence: (1) training set, (2) test set, (3) validation set.
+\begin{itemize}
+\item training set
+
+Training set is a set of data used to optimize a hypothesis function.
+
+\item test set
+
+Test set is a set of real-world data used to measure the accuracy of the hypothesis generated through training and validation phases.
+
+\item validation set
+
+Validation set is a set of data used to estimate the performance of the hypothesis.
+
+\end{itemize}
+
+\item Can you use the validation set as a test set?
+
+No. Since validation set is used to estimate the accuracy of the hypothesis during the validation phase, the resulting hypothesis is optimized for the validation set, and it is meaningless to use the validation set as a test set in order to measure the actual performance for the real-world data.
+
+\item Define in one sentence: overfitting
+
+A hypothesis is said to overfit the training data if it has smaller error on the training data but loses the generalization performance and has larger error on test data. 
+
+\item True or False (and why):
+
+\end{enumerate}
+
+\section{Decision Trees}
+
+\end{document}
+
