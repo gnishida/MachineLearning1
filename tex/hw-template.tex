@@ -17,13 +17,13 @@
 \section{Review Questions}
 
 \begin{enumerate}
-\item Assume the ... 
+\item Assume the probability of getting {\it head} when tossing a coin is $\lambda$.
 \begin{itemize}
-\item What is the ...
+\item What is the probability of getting the first head at the (k+1)-th toss?
 \[
 (1-\lambda)^k \lambda
 \]
-\item What is the expected ...\\
+\item What is the expected number of tosses needed to get the first head?\\
 Let $k$ be the number of tosses needed to get the first head. Then the expected number of $k$ is defined by
 \begin{eqnarray}
 E[k]&=&\lambda \times 1 + (1-\lambda) \lambda \times 2 + (1-\lambda)^2 \lambda \times 2 + \cdots\\
@@ -38,14 +38,14 @@ By subtracting (2) from (1), we get
 Thus, $E[k]=1 / \lambda $.
 \end{itemize}
 
-\item Answer to problem 2
+\item Let $f(x, y)=3x^2+y^2-xy-11x$
 
 \begin{itemize}
-\item What is the partial ...
+\item What is the partial derivative of $f$ with respect to $x$ $(\frac{\partial f}{\partial x})$? Find $\frac{\partial f}{\partial y}$ as well.
 \[
 \frac{\partial f}{\partial x}=6x-y-11,\:\:  \frac{\partial f}{\partial y}=2y - x
 \]
-\item Find a point ...
+\item Find a point $(x, y)$ that minimizes $f$.
 \[
 \left\{
 \begin{array}{l}
@@ -57,12 +57,19 @@ Thus, $E[k]=1 / \lambda $.
 By solving these equations, we get $(x, y)=(2, 1)$.
 \end{itemize}
 
-\item Answer to problem 3
+\item 
 \begin{itemize}
-\item Assume that
+\item Assume that $\omega \in R^n$ and $b$ is a scalar. A hyperplane in $\mathbb{R}^n$ is the set $\{x : x\in \mathbb{R}^n, \omega^Tx+b=0\}$. For $n=2$ and $n=3$, draw on paper an example of a hyperplane.\\
 The hyperplane has it normal vector $\omega$, and it is away from the origin by $-b/\|\omega\|$. The example of a hyperplane for $n=2$ and $n=3$ is in Figure 1.
 
-\item Assume we have two
+\begin{figure}[hbtp]
+\caption{Figure 1}
+\centering
+\includegraphics[scale=1]{figure1.eps}
+\end{figure}
+
+
+\item Assume we have two parallel hyperplanes: $\{x: x\in \mathbb{R}^n, \omega^Tx+b_1=0\}$ and $\{x: x\in \mathbb{R}^n, \omega^Tx+b_2=0\}$. What is the distance between these two hyperplanes?
 \[
 \left|\frac{-b_1}{\|\omega\|}-\frac{-b_2}{\|\omega\|}\right|=\frac{|b_1-b_2|}{\|\omega\|}
 \]
@@ -93,13 +100,42 @@ No. Since validation set is used to estimate the accuracy of the hypothesis duri
 
 \item Define in one sentence: overfitting
 
-A hypothesis is said to overfit the training data if it has smaller error on the training data but loses the generalization performance and has larger error on test data. 
+A hypothesis is said to overfit the training data if it has smaller error on the training data but loses the generalization performance and has larger error on test data.
 
-\item True or False (and why):
+\item True or False (and why): A learned hypothesis $f$ has a training error $e_{tr}$ and a testing error $e_{ts}$, where $e_{tr} > e_{ts}$.
+
+\begin{itemize}
+\item (1) can we say that $f$ overfits to the training data?
+
+False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. In this case, $e_{tr} > e_{ts}$, which indicates that $f$ is generalized very well.
+
+\item (2) Now, assume that $e_{tr} < e_{ts}$, does $f$ overfit to the training data?
+
+False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. Therefore, we cannot conclude that $f$ overfits to the training data even if $e_{tr} < e_{ts}$, unless we find another hypothesis $f'$ which has larger error on the training data but smaller error on the test data compared to $f$.
+
+\end{itemize}
 
 \end{enumerate}
 
 \section{Decision Trees}
+
+\begin{enumerate}
+\item The "Thrill and Romance" bookstore
+
+\begin{itemize}
+\item What is the entropy of the target variable? (Buy)
+
+\item What are the 
+
+\item What is the first attribute
+
+\item Due to a computer error
+
+\end{itemize}
+
+\item Decision Tree Implementation
+
+\end{enumerate}
 
 \end{document}
 
