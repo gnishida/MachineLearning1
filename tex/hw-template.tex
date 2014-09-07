@@ -179,6 +179,27 @@ Suppose the first example in our training data does not have a value of "Famous 
 
 \item Decision Tree Implementation
 
+The results of my decision tree on the validation and testing data are as shown in \ref{tab:result}. Since the testing data is not available beforehand, we have to choose the best maxDepth only based on the results on the validation data. Thus, we choose $maxDepth=1$, and we get 0.52238 as the accuracy. Note that this result is better than the case of $maxDepth=0$, which is a baseline, but there is significant difference in the accuracy between the results on validation and training data. This is probably because of the different distribution of values in the data and the insufficient number of training data relative to the size of hypothesis space.
+\begin{table}[htb]
+\begin{center}
+\caption{Results}
+\begin{tabular}{|c|c|c|} \hline
+maxDepth & Validation data & Test data \\ \hline \hline
+0 & 0.58461 & 0.50746 \\ \hline
+1 & 0.96923 & 0.52238 \\ \hline
+2 & 0.96923 & 0.52238 \\ \hline
+3 & 0.96923 & 0.52238 \\ \hline
+4 & 0.90769 & 0.56716 \\ \hline
+5 & 0.92307 & 0.56716 \\ \hline
+6 & 0.92307 & 0.56716 \\ \hline
+7 & 0.92307 & 0.56716 \\ \hline
+8 & 0.92307 & 0.56716 \\ \hline
+9 & 0.92307 & 0.56716 \\ \hline
+\end{tabular}
+\label{tab:result}
+\end{center}
+\end{table}
+
 \end{enumerate}
 
 \end{document}

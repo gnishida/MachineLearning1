@@ -76,13 +76,25 @@ def DecisionTree():
 	#		labels[2] = original_testing_labels
 	#		labels[3] = predicted_testing_labels
 
+	# define the attributes
+	attrs = {0: "B", 1: "C", 2: "C", 3: "B", 4: "B", 5: "B", 6: "B", 7: "C", 8: "B", 9: "B", 10: "C", 11: "B", 12: "B", 13: "C", 14: "C"}
 
+	# read training data
+	examples = readData("train.txt")
 
+	# read validation data
+	validations = readData("validation.txt")
 
-	return
+	# read test data
+	tests = readData("test.txt")
 
+	maxDepth = findBestMaxDepth(attrs, examples, validations, tests)
 
-def DecisionTree(maxDepth):
+	print("best maxDepth: " + str(maxDepth))
+
+	return DecisionTree2(maxDepth)
+
+def DecisionTree2(maxDepth):
 	#TODO: Your code starts from here.
 	#      This function should return a list of labels.
 	#      e.g.:
@@ -94,6 +106,9 @@ def DecisionTree(maxDepth):
 	#		labels[2] = original_testing_labels
 	#		labels[3] = predicted_testing_labels
 
+	labels = []
+	for i in xrange(4):
+		labels.append([])
 
 	# define the attributes
 	attrs = {0: "B", 1: "C", 2: "C", 3: "B", 4: "B", 5: "B", 6: "B", 7: "C", 8: "B", 9: "B", 10: "C", 11: "B", 12: "B", 13: "C", 14: "C"}
@@ -102,20 +117,71 @@ def DecisionTree(maxDepth):
 	examples = readData("train.txt")
 
 	# create a decision tree
-	rootNode = createSubTree(examples, attrs, maxDepth)
-	rootNode.display(0)
+	rootNode = buildDecisionTree(attrs, examples, maxDepth)
+	#rootNode.display(0)
 
-	o_train = truth(examples)
-	p_train = predict(rootNode, examples)
+	predicted_labels = predict(rootNode, examples)
+	for i in xrange(len(predicted_labels)):
+		labels[0].append(examples[i].label)
+		labels[1].append(predicted_labels[i])
 
 	# read test data and predict labels
-	tests = readData("train2.txt")
-	o_test = truth(tests)
-	p_test = predict(rootNode, tests)
+	tests = readData("test.txt")
+	predicted_labels = predict(rootNode, tests)
+	for i in xrange(len(predicted_labels)):
+		labels[2].append(tests[i].label)
+		labels[3].append(predicted_labels[i])
 
-	Check.eval(o_train, p_train, o_test, p_test)
+	return labels
 
-	return
+def findBestMaxDepth(attrs, examples, validations, tests):
+	# ground truth labels of validation data
+	vali_labels = []
+	for v in validations:
+		vali_labels.append(v.label)
+
+	# ground truth labels of test data
+	test_labels = []
+	for v in tests:
+		test_labels.append(v.label)
+
+	max_accuracy = 0.0
+	best_maxDepth = -1
+	for i in xrange(20):
+		rootNode = buildDecisionTree(attrs, examples, i)
+
+		# predict labels for validation data
+		predicted_labels = predict(rootNode, validations)
+
+		a = accuracy(vali_labels, predicted_labels)
+		print("maxDepth " + str(i) + ": accuracy=" + str(a))
+		if  a > max_accuracy:
+			max_accuracy = a
+			best_maxDepth = i
+
+		# predict labels for validation data
+		predicted_labels = predict(rootNode, tests)
+		a = accuracy(test_labels, predicted_labels)
+		print("   accuracy for tests = " + str(a))
+
+	return best_maxDepth
+
+# build a decision tree
+def buildDecisionTree(attrs, examples, maxDepth):
+	# create a decision tree
+	rootNode = createSubTree(examples, attrs, maxDepth)
+
+	return rootNode
+
+# compute the accuracy
+def accuracy(orig_labels, pred_labels):
+	match = 0
+	num = len(pred_labels)
+	for i in xrange(num):
+		if orig_labels[i] == pred_labels[i]:
+			match += 1
+	return float(match) / num
+
 
 # get the ground truth of the labels
 def truth(examples):
@@ -326,4 +392,5 @@ def readData(filename):
 	return examples
 
 if __name__ == '__main__':
-	DecisionTree(2)
+	labels = DecisionTree()
+	Check.eval(labels[0], labels[1], labels[2], labels[3])

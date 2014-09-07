@@ -2,50 +2,56 @@
 -- START DISKCACHE
 C:\Users\gen\Documents\GitHub\MachineLearning1\python\.metadata\.plugins\org.eclipse.core.resources\.projects\DecisionTree\com.python.pydev.analysis\v2_indexcache
 Check|1409959137429|C:\Users\gen\Documents\GitHub\MachineLearning1\python\DecisionTree\Check.py
-Solution|1410105283905|C:\Users\gen\Documents\GitHub\MachineLearning1\python\DecisionTree\Solution.py
+Solution|1410109448461|C:\Users\gen\Documents\GitHub\MachineLearning1\python\DecisionTree\Solution.py
 -- END DISKCACHE
 -- START DICTIONARY
 6
-1=Check
+2=Check
 5=TreeNode.__init__
 4=Example
 3=TreeNode
 6=Example.__init__
-2=Solution
+1=Solution
 -- END DICTIONARY
 -- START TREE 1
-20
-acc|1|accuracy!10@
-cre|1|createSubTree!18@
-dec|1|DecisionTree!18@
-ent|1|entropy!18@
-eva|1|eval!10@
-exa|1|Example!17@
+26
+acc|2|accuracy!10@accuracy!18@
+att|0|
+bui|1|buildDecisionTree!10@
+cre|1|createSubTree!10@
+dec|2|DecisionTree2!10@DecisionTree!10@
+ent|1|entropy!10@
+eva|1|eval!18@
+exa|1|Example!9@
 f|0|
-fin|2|findThresholds!18@findBestAttribute!18@
-isa|1|isAllExampleLabeledSame!18@
-lab|1|labels!11@
-mos|1|mostCommonLabel!18@
+fin|3|findBestMaxDepth!10@findThresholds!10@findBestAttribute!10@
+isa|1|isAllExampleLabeledSame!10@
+lab|2|labels!19@labels!11@
+mat|0|
+mos|1|mostCommonLabel!10@
 num|0|
-pre|1|predict!18@
-rea|2|readData!18@readfile!10@
+o_l|0|
+p_l|0|
+pre|1|predict!10@
+rea|2|readData!10@readfile!18@
 roo|0|
 row|0|
-spl|1|split!18@
-tot|1|totalEntropy!18@
-tre|1|TreeNode!17@
-tru|1|truth!18@
+spl|1|split!10@
+tes|0|
+tot|1|totalEntropy!10@
+tre|1|TreeNode!9@
+tru|1|truth!10@
 -- END TREE
 -- START TREE 2
 10
-__i|2|__init__!3&18@__init__!4&18@
-add|1|addChildNode!3&18@
-att|3|attr_th!5&19@attr_type!5&19@attr_index!5&19@
-chi|1|childNodes!5&19@
-dis|1|display!3&18@
-isl|1|isLeaf!5&19@
-lab|2|label!5&19@label!6&19@
-pre|1|predict!3&18@
-row|1|row!6&19@
-wei|1|weight!6&19@
+__i|2|__init__!3&10@__init__!4&10@
+add|1|addChildNode!3&10@
+att|3|attr_th!5&11@attr_type!5&11@attr_index!5&11@
+chi|1|childNodes!5&11@
+dis|1|display!3&10@
+isl|1|isLeaf!5&11@
+lab|2|label!5&11@label!6&11@
+pre|1|predict!3&10@
+row|1|row!6&11@
+wei|1|weight!6&11@
 -- END TREE
