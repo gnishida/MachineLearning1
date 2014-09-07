@@ -1,10 +1,12 @@
 import math
 import copy
+import Check
+from statsmodels.sandbox.distributions import examples
 
 # Example
 class Example:
-	def __init__(self, rows, label, weight):
-		self.rows = rows
+	def __init__(self, row, label, weight):
+		self.row = row
 		self.label = label
 		self.weight = weight
 
@@ -26,23 +28,41 @@ class TreeNode:
 			print(" " * indent + "Leaf: " + self.label)
 			return
 
-		print(" " * indent + "Attribute: " + str(self.attr_index))
-		if self.attr_type == "C":
-			print(" " * indent + "threshold: " + str(self.attr_th))
+		if self.attr_type == "B":
+			print(" " * indent + "Attribute: " + str(self.attr_index))
+		else:
+			print(" " * indent + "Attribute: " + str(self.attr_index) + " (Threshold: " + str(self.attr_th) + ")")
 		for value, childNode in self.childNodes.iteritems():
-			print(" " * (indent + 4) + "[value: " + str(value) + "]")
+			print(" " * (indent + 2) + "+ [value: " + str(value) + "]")
 			childNode.display(indent + 4)
 
-	def predict(self, row):
+	def predict(self, example):
 		if self.isLeaf == True:
-			return self.label
+			if self.label == "+": return 1.0
+			elif self.label == "-": return -1.0
+			else: return 0.0
 		elif self.attr_type == "B":
-			return self.childNodes[row[self.attr_index]].predict(row)
-		else:
-			if float(row[self.attr_index]) < self.attr_th:
-				return self.childNodes["<"].predict(row)
+			if self.attr_index >= len(example.row):
+				print("ERROR")
+
+			if example.row[self.attr_index] == "?":
+				ret = 0.0
+				for value, childNode in self.childNodes.iteritems():
+					ret += childNode.predict(example) / float(len(self.childNodes))
+				return ret
 			else:
-				return self.childNodes[">"].predict(row)
+				return self.childNodes[example.row[self.attr_index]].predict(example)
+		else:
+			if example.row[self.attr_index] == "?":
+				ret = 0.0
+				for value, childNode in self.childNodes.iteritems():
+					ret += childNode.predict(example) / float(len(self.childNodes))
+				return ret
+			else:
+				if float(example.row[self.attr_index]) < self.attr_th:
+					return self.childNodes["<"].predict(example)
+				else:
+					return self.childNodes[">"].predict(example)
 
 def DecisionTree():
 	#TODO: Your code starts from here.
@@ -78,51 +98,96 @@ def DecisionTree(maxDepth):
 	# define the attributes
 	attrs = {0: "B", 1: "C", 2: "C", 3: "B", 4: "B", 5: "B", 6: "B", 7: "C", 8: "B", 9: "B", 10: "C", 11: "B", 12: "B", 13: "C", 14: "C"}
 
-	# read test data
-	rows = readfile("train.txt")
+	# read training data
+	examples = readData("train.txt")
 
-	rootNode = createSubTree(rows, attrs, maxDepth)
+	# create a decision tree
+	rootNode = createSubTree(examples, attrs, maxDepth)
 	rootNode.display(0)
 
-	labels = []
-	numCorrect = 0
-	for i in xrange(len(rows)):
-		label = rootNode.predict(rows[i])
-		if rows[i][15] == label:
-			numCorrect += 1
-		labels.append(label)
+	o_train = truth(examples)
+	p_train = predict(rootNode, examples)
 
-	print(labels)
-	print("Accuracy: " + str(float(numCorrect) / float(len(rows))))
+	# read test data and predict labels
+	tests = readData("train2.txt")
+	o_test = truth(tests)
+	p_test = predict(rootNode, tests)
+
+	Check.eval(o_train, p_train, o_test, p_test)
 
 	return
 
+# get the ground truth of the labels
+def truth(examples):
+	labels = []
+	for example in examples:
+		labels.append(example.label)
+	return labels
+
+# predict labels for the given test data
+def predict(rootNode, tests):
+	labels = []
+	for test in tests:
+		label = "?"
+		if rootNode.predict(test) >= 0:
+			label = "+"
+		else:
+			label = "-"
+		labels.append(label)
+	return labels
+
 # create subtree of the decision tree
-def createSubTree(rows, attrs, maxDepth):
-	attr_index, attr_th = findBestAttribute(rows, attrs)
+def createSubTree(examples, attrs, maxDepth):
+	# if all the examples are labeled the same, return a leaf node with label
+	if maxDepth == 0 or isAllExampleLabeledSame(examples):
+		return TreeNode(-1, "", 0, True, mostCommonLabel(examples))
+
+	attr_index, attr_th = findBestAttribute(examples, attrs)
+
+	# if there is no available attributes left, then return a leaf node with most common label
 	if attr_index == -1:
-		print("Unexpected error!!!!")
-		return TreeNode(-1, "", 0, True, "?")
+		return TreeNode(-1, "", 0, True, mostCommonLabel(examples))
 
 	node = TreeNode(attr_index, attrs[attr_index], attr_th, False, "")
 
-	splitted_rows = split(rows, attr_index, attrs[attr_index], attr_th)
-	for value, subset in splitted_rows.iteritems():
-		if len(subset) == 0: continue
+	splitted_examples = split(examples, attr_index, attrs[attr_index], attr_th)
+	for value, subset in splitted_examples.iteritems():
+		if len(subset) == 0:
+			print("no data in this subset. unexpected error!!!!")
+			continue
 		#elif maxDepth == 0: continue
-		elif entropy(subset) == 0:
-			label_index = len(subset[0]) - 1
-			child = TreeNode(-1, "", 0, True, subset[0][label_index])
-			node.addChildNode(value, child)
 		else:
 			child = createSubTree(subset, attrs, maxDepth - 1)
 			node.addChildNode(value, child)
 
 	return node
 
+# check if all the examples are labeled the same
+def isAllExampleLabeledSame(examples):
+	if len(examples) == 0: return True
+
+	label = examples[0].label
+	for i in xrange(len(examples)):
+		if examples[i].label != label: return False
+	return True
+
+# return the most common label in the examples
+def mostCommonLabel(examples):
+	numPositive = 0.0
+	numNegative = 0.0
+
+	for example in examples:
+		if example.label == "+":
+			numPositive += example.weight
+		else:
+			numNegative += example.weight
+
+	if numPositive >= numNegative: return "+"
+	else: return "-"
+
 # find the best attribute to get the highest information gain
-def findBestAttribute(rows, attrs):
-	e = entropy(rows)
+def findBestAttribute(examples, attrs):
+	e = entropy(examples)
 
 	max_gain = 0
 	attr_index = -1
@@ -130,98 +195,111 @@ def findBestAttribute(rows, attrs):
 
 	for index, type in attrs.iteritems():
 		if type == "B":
-			splitted_rows = split(rows, index, type, 0)
-			e2 = totalEntropy(splitted_rows)
+			splitted_examples = split(examples, index, type, 0)
+			e2 = totalEntropy(splitted_examples)
 			gain = e - e2
 			if gain > max_gain:
 				max_gain = gain
 				attr_index = index
 		else:
-			thresholds = findThreshold(rows, index)
-			for i in xrange(len(thresholds)):
-				splitted_rows = split(rows, index, type, thresholds[i])
-				e2 = totalEntropy(splitted_rows)
+			thresholds = findThresholds(examples, index)
+			for threshold in thresholds:
+				splitted_examples = split(examples, index, type, threshold)
+				e2 = totalEntropy(splitted_examples)
 				gain = e - e2
 				if gain > max_gain:
 					max_gain = gain
 					attr_index = index
-					attr_th = thresholds[i]
+					attr_th = threshold
 
 	return attr_index, attr_th
 
-# find the threshold
-def findThreshold(rows, attr_index):
+# find the thresholds
+def findThresholds(examples, attr_index):
 	thresholds = []
 
-	if len(rows) == 0: return thresholds
-
-	label_index = len(rows[0]) - 1
-
 	# extract only valid values
-	rows2 = []
-	for i in xrange(len(rows)):
-		if rows[i][attr_index] == "?": continue
-		rows2.append(rows[i])
+	examples2 = []
+	for example in examples:
+		if example.row[attr_index] == "?": continue
+		examples2.append(example)
+
+	if len(examples2) == 0: return thresholds
 
 	# sort
 	#rows2 = sorted(rows, key=lambda row: float(row[attr_index]))
-	rows2.sort(key=lambda row: float(row[attr_index]))
+	examples2.sort(key=lambda example: float(example.row[attr_index]))
 
-	previous_label = rows2[0][label_index]
-	previous_value = float(rows2[0][attr_index])
-	for i in xrange(len(rows2)):
-		if rows2[i][label_index] != previous_label:
-			previous_label = rows2[i][label_index]
-			thresholds.append((previous_value + float(rows2[i][attr_index])) * 0.5)
-		previous_value = float(rows2[i][attr_index])
+	previous_label = examples2[0].label
+	previous_value = float(examples2[0].row[attr_index])
+	for example2 in examples2:
+		if example2.label != previous_label:
+			previous_label = example2.label
+			thresholds.append((previous_value + float(example2.row[attr_index])) * 0.5)
+		previous_value = float(example2.row[attr_index])
 
 	return thresholds
 
 # split data by a given attribute
-def split(rows, attr_index, attr_type, attr_th):
-	splitted_rows = {}
-	if attr_type == "B":
-		for i in xrange(len(rows)):
-			value = rows[i][attr_index]
-			if not value in splitted_rows:
-				splitted_rows[value] = []
-			splitted_rows[value].append(rows[i])
-	else:
-		splitted_rows["<"] = []
-		splitted_rows[">"] = []
-		for i in xrange(len(rows)):
-			value = float(rows[i][attr_index])
-			if value < attr_th:
-				splitted_rows["<"].append(rows[i])
-			else:
-				splitted_rows[">"].append(rows[i])
+def split(examples, attr_index, attr_type, attr_th):
+	splitted_examples = {}
+	total_num = 0
 
-	return splitted_rows
+	if attr_type == "B":
+
+		for example in examples:
+			value = example.row[attr_index]
+			if value == "?": continue
+			if not value in splitted_examples:
+				splitted_examples[value] = []
+			splitted_examples[value].append(example)
+			total_num += 1
+	else:
+		splitted_examples["<"] = []
+		splitted_examples[">"] = []
+		for example in examples:
+			if example.row[attr_index] == "?": continue
+			value = float(example.row[attr_index])
+			if value < attr_th:
+				splitted_examples["<"].append(example)
+			else:
+				splitted_examples[">"].append(example)
+			total_num += 1
+
+	# compute the proportion of the subsets
+	proportions = {}
+	for value, subset in splitted_examples.iteritems():
+		proportions[value] = float(len(subset)) / float(total_num)
+
+	# for the examples with missing values, assign to the set with probability proportional to the size of the subsets
+	for example in examples:
+		if value == "?":
+			for value, subset in splitted_examples.iteritems():
+				subset.append(Example(example.row, example.label, proportions[value]))
+
+	return splitted_examples
 
 # compute Entropy of all the subset
-def totalEntropy(splitted_rows):
+def totalEntropy(splitted_examples):
 	total = 0
 	total_num = 0
-	keys = splitted_rows.keys()
 
-	for i in xrange(len(keys)):
-		num = len(splitted_rows[keys[i]])
-		e = entropy(splitted_rows[keys[i]])
+	for value, examples in splitted_examples.iteritems():
+		num = len(examples)
+		e = entropy(examples)
 		total += e * num
 		total_num += num
 
 	return total / total_num
 
 # compute Entropy for a given data set
-def entropy(rows):
-	if len(rows) == 0: return 0
-
-	label_index = len(rows[0]) - 1
+def entropy(examples):
+	if len(examples) == 0: return 0
 
 	num_positive = 0
 	num_negative = 0
-	for i in xrange(len(rows)):
-		if rows[i][label_index] == '+':
+	for example in examples:
+		if example.label == '+':
 			num_positive += 1
 		else:
 			num_negative += 1
@@ -236,15 +314,16 @@ def entropy(rows):
 #readfile:
 #   Input: filename
 #   Output: return a list of rows.
-def readfile(filename):
-    f = open(filename).read()
-    rows = []
-    for line in f.split('\r'): # for mac, we use \r
-        rows.append(line.split('\t'));
+def readData(filename):
+	f = open(filename).read()
+	examples = []
+	for line in f.split('\r'):
+		row = line.split('\t')
+		label = row[len(row) - 1]
+		row.pop(len(row) - 1)
+		examples.append(Example(row, label, 1.0))
 
-    return rows
-
+	return examples
 
 if __name__ == '__main__':
-
-	DecisionTree(10)
+	DecisionTree(2)
