@@ -1,6 +1,13 @@
 import math
 import copy
 
+# Example
+class Example:
+	def __init__(self, rows, label, weight):
+		self.rows = rows
+		self.label = label
+		self.weight = weight
+
 # Decision Tree Node class
 class TreeNode:
 	def __init__(self, attr_index, attr_type, attr_th, isLeaf, label):
@@ -25,6 +32,17 @@ class TreeNode:
 		for value, childNode in self.childNodes.iteritems():
 			print(" " * (indent + 4) + "[value: " + str(value) + "]")
 			childNode.display(indent + 4)
+
+	def predict(self, row):
+		if self.isLeaf == True:
+			return self.label
+		elif self.attr_type == "B":
+			return self.childNodes[row[self.attr_index]].predict(row)
+		else:
+			if float(row[self.attr_index]) < self.attr_th:
+				return self.childNodes["<"].predict(row)
+			else:
+				return self.childNodes[">"].predict(row)
 
 def DecisionTree():
 	#TODO: Your code starts from here.
@@ -58,42 +76,47 @@ def DecisionTree(maxDepth):
 
 
 	# define the attributes
-	attrs = {0: "B", 1: "B", 2: "B"}
+	attrs = {0: "B", 1: "C", 2: "C", 3: "B", 4: "B", 5: "B", 6: "B", 7: "C", 8: "B", 9: "B", 10: "C", 11: "B", 12: "B", 13: "C", 14: "C"}
 
 	# read test data
-	rows = readfile("simple.txt")
+	rows = readfile("train.txt")
 
 	rootNode = createSubTree(rows, attrs, maxDepth)
 	rootNode.display(0)
+
+	labels = []
+	numCorrect = 0
+	for i in xrange(len(rows)):
+		label = rootNode.predict(rows[i])
+		if rows[i][15] == label:
+			numCorrect += 1
+		labels.append(label)
+
+	print(labels)
+	print("Accuracy: " + str(float(numCorrect) / float(len(rows))))
 
 	return
 
 # create subtree of the decision tree
 def createSubTree(rows, attrs, maxDepth):
 	attr_index, attr_th = findBestAttribute(rows, attrs)
-	#if attr_index == -1: return ret
+	if attr_index == -1:
+		print("Unexpected error!!!!")
+		return TreeNode(-1, "", 0, True, "?")
 
 	node = TreeNode(attr_index, attrs[attr_index], attr_th, False, "")
-
-	# remove the used attribute
-	attrs2 = copy.copy(attrs)
-	del attrs2[attr_index]
 
 	splitted_rows = split(rows, attr_index, attrs[attr_index], attr_th)
 	for value, subset in splitted_rows.iteritems():
 		if len(subset) == 0: continue
-		elif maxDepth == 0: continue
+		#elif maxDepth == 0: continue
 		elif entropy(subset) == 0:
 			label_index = len(subset[0]) - 1
 			child = TreeNode(-1, "", 0, True, subset[0][label_index])
 			node.addChildNode(value, child)
 		else:
-			child = createSubTree(subset, attrs2, maxDepth - 1)
+			child = createSubTree(subset, attrs, maxDepth - 1)
 			node.addChildNode(value, child)
-		#ret[3][i] = subset
-
-	#print(ret[2])
-	#print(ret[3])
 
 	return node
 
@@ -134,16 +157,23 @@ def findThreshold(rows, attr_index):
 
 	label_index = len(rows[0]) - 1
 
-	# sort
-	rows.sort(key=lambda row:float(row[attr_index]))
-
-	previous_label = rows[0][label_index]
-	previous_value = float(rows[0][attr_index])
+	# extract only valid values
+	rows2 = []
 	for i in xrange(len(rows)):
-		if rows[i][label_index] != previous_label:
-			previous_label = rows[i][label_index]
-			thresholds.append((previous_value + float(rows[i][attr_index])) * 0.5)
-		previous_value = float(rows[i][attr_index])
+		if rows[i][attr_index] == "?": continue
+		rows2.append(rows[i])
+
+	# sort
+	#rows2 = sorted(rows, key=lambda row: float(row[attr_index]))
+	rows2.sort(key=lambda row: float(row[attr_index]))
+
+	previous_label = rows2[0][label_index]
+	previous_value = float(rows2[0][attr_index])
+	for i in xrange(len(rows2)):
+		if rows2[i][label_index] != previous_label:
+			previous_label = rows2[i][label_index]
+			thresholds.append((previous_value + float(rows2[i][attr_index])) * 0.5)
+		previous_value = float(rows2[i][attr_index])
 
 	return thresholds
 
@@ -209,7 +239,7 @@ def entropy(rows):
 def readfile(filename):
     f = open(filename).read()
     rows = []
-    for line in f.split('\n'): # for mac, we use \r
+    for line in f.split('\r'): # for mac, we use \r
         rows.append(line.split('\t'));
 
     return rows

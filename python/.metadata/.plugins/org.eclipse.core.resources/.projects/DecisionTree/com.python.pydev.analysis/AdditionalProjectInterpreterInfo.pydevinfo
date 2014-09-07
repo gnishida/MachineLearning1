@@ -2,7 +2,7 @@
 -- START DISKCACHE
 C:\Users\gen\Documents\GitHub\MachineLearning1\python\.metadata\.plugins\org.eclipse.core.resources\.projects\DecisionTree\com.python.pydev.analysis\v2_indexcache
 Check|1409959137429|C:\Users\gen\Documents\GitHub\MachineLearning1\python\DecisionTree\Check.py
-Solution|1410058606512|C:\Users\gen\Documents\GitHub\MachineLearning1\python\DecisionTree\Solution.py
+Solution|1410063629913|C:\Users\gen\Documents\GitHub\MachineLearning1\python\DecisionTree\Solution.py
 -- END DISKCACHE
 -- START DICTIONARY
 4
@@ -12,7 +12,7 @@ Solution|1410058606512|C:\Users\gen\Documents\GitHub\MachineLearning1\python\Dec
 2=Solution
 -- END DICTIONARY
 -- START TREE 1
-15
+14
 acc|1|accuracy!10@
 cre|1|createSubTree!18@
 dec|1|DecisionTree!18@
@@ -20,36 +20,22 @@ ent|1|entropy!18@
 eva|1|eval!10@
 f|0|
 fin|2|findThreshold!18@findBestAttribute!18@
-gib|0|
 lab|1|labels!11@
+pre|0|
 rea|2|readfile!18@readfile!10@
 row|0|
-sho|0|
 spl|1|split!18@
 tot|1|totalEntropy!18@
 tre|1|TreeNode!17@
 -- END TREE
 -- START TREE 2
-21
+8
 __i|1|__init__!3&18@
 add|1|addChildNode!3&18@
 att|3|attr_th!4&19@attr_type!4&19@attr_index!4&19@
 chi|1|childNodes!4&19@
-cre|0|
-dec|0|
 dis|1|display!3&18@
-ent|0|
-fin|0|
-img|0|
 isl|1|isLeaf!4&19@
 lab|1|label!4&19@
-ran|0|
-rea|0|
-sho|0|
-spl|0|
-t|0|
-tot|0|
-upd|0|
-x|0|
-y|0|
+pre|1|predict!3&18@
 -- END TREE
