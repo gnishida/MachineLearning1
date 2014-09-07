@@ -113,10 +113,12 @@ def DecisionTree2(maxDepth):
 	# define the attributes
 	attrs = {0: "B", 1: "C", 2: "C", 3: "B", 4: "B", 5: "B", 6: "B", 7: "C", 8: "B", 9: "B", 10: "C", 11: "B", 12: "B", 13: "C", 14: "C"}
 
-	# create a decision tree
+	# read training data
 	examples = readData("train.txt")
+
+	# create a decision tree
 	rootNode = buildDecisionTree(attrs, examples, maxDepth)
-	rootNode.display(0)
+	#rootNode.display(0)
 
 	predicted_labels = predict(rootNode, examples)
 	for i in xrange(len(predicted_labels)):
@@ -381,8 +383,7 @@ def entropy(examples):
 def readData(filename):
 	f = open(filename).read()
 	examples = []
-	#for line in f.split('\r'):
-	for line in f.split('\n'):
+	for line in f.split('\r'):
 		row = line.split('\t')
 		label = row[len(row) - 1]
 		row.pop(len(row) - 1)

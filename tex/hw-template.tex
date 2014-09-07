@@ -60,12 +60,13 @@ By solving these equations, we get $(x, y)=(2, 1)$.
 \item 
 \begin{itemize}
 \item Assume that $\omega \in R^n$ and $b$ is a scalar. A hyperplane in $\mathbb{R}^n$ is the set $\{x : x\in \mathbb{R}^n, \omega^Tx+b=0\}$. For $n=2$ and $n=3$, draw on paper an example of a hyperplane.\\
-The hyperplane has it normal vector $\omega$, and it is away from the origin by $-b/\|\omega\|$. The example of a hyperplane for $n=2$ and $n=3$ is in Figure 1.
+The hyperplane has it normal vector $\omega$, and it is away from the origin by $-b/\|\omega\|$. The example of a hyperplane for $n=2$ and $n=3$ is in Figure \ref{fig:one}.
 
 \begin{figure}[hbtp]
-\caption{Figure 1}
 \centering
-\includegraphics[scale=1]{figure1.eps}
+\includegraphics[width=130mm]{figure1.png}
+\caption{The example of a hyperplane}
+\label{fig:one}
 \end{figure}
 
 
@@ -90,13 +91,13 @@ Test set is a set of real-world data used to measure the accuracy of the hypothe
 
 \item validation set
 
-Validation set is a set of data used to estimate the performance of the hypothesis.
+Validation set is a set of data used to estimate the performance of the hypothesis during the training phase.
 
 \end{itemize}
 
 \item Can you use the validation set as a test set?
 
-No. Since validation set is used to estimate the accuracy of the hypothesis during the validation phase, the resulting hypothesis is optimized for the validation set, and it is meaningless to use the validation set as a test set in order to measure the actual performance for the real-world data.
+No. Since validation set is used to estimate the accuracy of the hypothesis during the training phase, the resulting hypothesis is optimized for the validation set, and it is meaningless to use the validation set as a test set in order to measure the actual performance for the real-world data.
 
 \item Define in one sentence: overfitting
 
@@ -132,7 +133,7 @@ The number of examples labeled "Buy=Y" is 7, while the number of examples labele
 \item What are the attributes considered by the algorithm?\\
 All the attributes, "Pages", "Famous Author", "Category", and "Cover Color" should be considered by the algorithm. However, for "Pages", since it is a continuous attribute, we first have to sort examples according to the values of "Pages" and check the mid-point as a possible threshold in order to discretize. The sorted values are as follows:\\
 45(-), 50(+), 72(+), 100(-), 120(+), 142(+), 150(+), 200(-), 300(+), 350(+), 1000(-).\\
-Thus, the possible thresholds for "Pages" are 47.5, 86, 110, 175, 250, and 675. 
+Thus, the possible thresholds for "Pages" are 47.5, 86, 110, 175, 250, and 675. These values are called cut points \cite{fayyad1992}, and used to split the continuous space into two ranges so that the continuous values can be handled in the same manner with the discrete values.
 
 \item What is the first attribute that the algorithm will split the data on? What is its information gain?
 
@@ -173,13 +174,16 @@ Same as threshold=47.5, which is 0.14449.
 The attribute which produces the highest gain is "Pages", so we should use "Pages" as the first attribute to split, and its information gain is 0.14449 if we use threshold=47.5 or 675.
 Note that if we split all the values of "Pages", then we will easily be able to separate the labels with information gain = 1.0. However, this will be overfitting, and we do not want to do that.
 \item Due to a computer error some of the training examples attributes were deleted! Revise the decision tree training algorithm to deal with missing values in the training data.\\
-The goal of training is to minimize the expected loss over the distribution of values of attributes. Intuitively, it is better to use this distribution to estimate the missing values, but, we do not know the distribution in advance. Therefore, the best option would be to assume that the missing values can be all the possible options with equal probability. \\
-Suppose the first example in our training data does not have a value of "Famous Author". If we use "Famous Author" as the first attribute to split the tree, then this example contributes a half to both sub-trees. In other words, the subset $S_Y$ for which attribute "Famous Author" has value "Y" will contain 5.5 examples, while the other subset $S_N$ will have 4.5 examples. Also, since the first example is labeled "Buy=Y", in each subset, this example contributes 0.5 to the positive proportion for computing entropy, and the information gain can be computed in the similar manner. In this way, the decision tree training algorithm can deal with missing values in the training data.
+The goal of training is to minimize the expected loss over the distribution of values of attributes. Intuitively, it is better to use this distribution to estimate the missing values, but, we do not know the distribution in advance. One option would be to assume that the missing values can be all the possible values with equal probability. \\
+Suppose the first example in our training data does not have a value of "Famous Author". If we use "Famous Author" as the first attribute to split the tree, then this example will contribute a half to each sub-tree. In other words, the subset $S_Y$ for which attribute "Famous Author" has value "Y" will contain 5.5 examples, while the other subset $S_N$ will have 4.5 examples. Also, since the first example is labeled "Buy=Y", in each subset, this example contributes 0.5 to the positive proportion for computing entropy, and the information gain can be computed in the similar manner. 
+Another option is to use the proportion of each sub-tree as a probability of having the corresponding value. If we have enough number of training data without missing values, the proportion of the sub-trees are likely to be similar to the distribution of testing data. Hence, we can estimate the missing values.
+In the decision tree implementation in the following section, I used the latter approach.
 \end{itemize}
 
 \item Decision Tree Implementation
 
-The results of my decision tree on the validation and testing data are as shown in \ref{tab:result}. Since the testing data is not available beforehand, we have to choose the best maxDepth only based on the results on the validation data. Thus, we choose $maxDepth=1$, and we get 0.52238 as the accuracy. Note that this result is better than the case of $maxDepth=0$, which is a baseline, but there is significant difference in the accuracy between the results on validation and training data. This is probably because of the different distribution of values in the data and the insufficient number of training data relative to the size of hypothesis space.
+I implemented the decision tree algorithm using the second option for the missing values. With regard to the continuous values, for every node, I used each cut point discussed above as a candidate of the attribute in addition to the discrete attributes, and choose the best one which produces the highest information gain. Also, the validation data was used to find the best maxDepth, and measure the performance of the resulting decision tree on the test data. Please refer to the attached source code for details.
+
 \begin{table}[htb]
 \begin{center}
 \caption{Results}
@@ -200,7 +204,13 @@ maxDepth & Validation data & Test data \\ \hline \hline
 \end{center}
 \end{table}
 
+The results of my decision tree on the validation and testing data are shown in Table \ref{tab:result}. Since the testing data is not available beforehand, we have to choose the best maxDepth only based on the results on the validation data. Thus, we choose $maxDepth=1$, and we get 0.52238 as the accuracy. Note that this result is better than the case of $maxDepth=0$, which is a baseline, but there is significant difference in the accuracy between the results on validation and training data. This is probably because of the different distribution of values in the feature space.
+
 \end{enumerate}
+
+\begin{thebibliography}{9}
+\bibitem{fayyad1992} Fayyad, Usama M. and Irani, Keki B. 1992. On the Handling of Continuous-Valued Attributes in Decision Tree Generation. {\it Machine Learning}, 8, pp. 87 - 102.
+\end{thebibliography}
 
 \end{document}
 
