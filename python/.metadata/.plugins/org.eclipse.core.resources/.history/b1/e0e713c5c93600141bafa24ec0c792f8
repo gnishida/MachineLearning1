@@ -297,15 +297,9 @@ def findThresholds(examples, attr_index):
 	previous_label = examples2[0].label
 	previous_value = float(examples2[0].row[attr_index])
 	for example2 in examples2:
-		if previous_label == "?" and previous_value == float(example2.row[attr_index]): continue
-
 		if example2.label != previous_label:
 			previous_label = example2.label
-
-			if previous_value == float(example2.row[attr_index]):
-				previous_label = "?"
-			else:
-				thresholds.append((previous_value + float(example2.row[attr_index])) * 0.5)
+			thresholds.append((previous_value + float(example2.row[attr_index])) * 0.5)
 		previous_value = float(example2.row[attr_index])
 
 	return thresholds
@@ -387,7 +381,8 @@ def entropy(examples):
 def readData(filename):
 	f = open(filename).read()
 	examples = []
-	for line in f.split('\r'):
+	#for line in f.split('\r'):
+	for line in f.split('\n'):
 		row = line.split('\t')
 		label = row[len(row) - 1]
 		row.pop(len(row) - 1)

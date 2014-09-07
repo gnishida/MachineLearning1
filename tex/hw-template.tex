@@ -60,7 +60,7 @@ By solving these equations, we get $(x, y)=(2, 1)$.
 \item 
 \begin{itemize}
 \item Assume that $\omega \in R^n$ and $b$ is a scalar. A hyperplane in $\mathbb{R}^n$ is the set $\{x : x\in \mathbb{R}^n, \omega^Tx+b=0\}$. For $n=2$ and $n=3$, draw on paper an example of a hyperplane.\\
-The hyperplane has it normal vector $\omega$, and it is away from the origin by $-b/\|\omega\|$. The example of a hyperplane for $n=2$ and $n=3$ is in Figure \ref{fig:one}.
+The hyperplane has it normal vector $\omega$, and it is away from the origin by $-b/\|\omega\|$. The example of a hyperplane for $n=2$ and $n=3$ is shown in Figure \ref{fig:one}.
 
 \begin{figure}[hbtp]
 \centering
@@ -124,13 +124,15 @@ False. Since the hypothesis $f$ is optimized for the training data while the tes
 \item The "Thrill and Romance" bookstore
 
 \begin{itemize}
-\item What is the entropy of the target variable? (Buy)\\
+\item What is the entropy of the target variable? (Buy)
+
 The number of examples labeled "Buy=Y" is 7, while the number of examples labeled "Buy=N" is 4. Thus,
 \[
 -\frac{7}{11}\log \frac{7}{11}-\frac{4}{11}\log \frac{4}{11}=0.94566
 \]
 
-\item What are the attributes considered by the algorithm?\\
+\item What are the attributes considered by the algorithm?
+
 All the attributes, "Pages", "Famous Author", "Category", and "Cover Color" should be considered by the algorithm. However, for "Pages", since it is a continuous attribute, we first have to sort examples according to the values of "Pages" and check the mid-point as a possible threshold in order to discretize. The sorted values are as follows:\\
 45(-), 50(+), 72(+), 100(-), 120(+), 142(+), 150(+), 200(-), 300(+), 350(+), 1000(-).\\
 Thus, the possible thresholds for "Pages" are 47.5, 86, 110, 175, 250, and 675. These values are called cut points \cite{fayyad1992}, and used to split the continuous space into two ranges so that the continuous values can be handled in the same manner with the discrete values.
@@ -173,8 +175,11 @@ Same as threshold=47.5, which is 0.14449.
 \end{itemize}
 The attribute which produces the highest gain is "Pages", so we should use "Pages" as the first attribute to split, and its information gain is 0.14449 if we use threshold=47.5 or 675.
 Note that if we split all the values of "Pages", then we will easily be able to separate the labels with information gain = 1.0. However, this will be overfitting, and we do not want to do that.
-\item Due to a computer error some of the training examples attributes were deleted! Revise the decision tree training algorithm to deal with missing values in the training data.\\
-The goal of training is to minimize the expected loss over the distribution of values of attributes. Intuitively, it is better to use this distribution to estimate the missing values, but, we do not know the distribution in advance. One option would be to assume that the missing values can be all the possible values with equal probability. \\
+
+\item Due to a computer error some of the training examples attributes were deleted! Revise the decision tree training algorithm to deal with missing values in the training data.
+
+The goal of training is to minimize the expected loss over the distribution of values of attributes. Intuitively, it is better to use this distribution to estimate the missing values, but, we do not know the distribution in advance. One option would be to assume that the missing values can be all the possible values with equal probability. 
+
 Suppose the first example in our training data does not have a value of "Famous Author". If we use "Famous Author" as the first attribute to split the tree, then this example will contribute a half to each sub-tree. In other words, the subset $S_Y$ for which attribute "Famous Author" has value "Y" will contain 5.5 examples, while the other subset $S_N$ will have 4.5 examples. Also, since the first example is labeled "Buy=Y", in each subset, this example contributes 0.5 to the positive proportion for computing entropy, and the information gain can be computed in the similar manner. 
 Another option is to use the proportion of each sub-tree as a probability of having the corresponding value. If we have enough number of training data without missing values, the proportion of the sub-trees are likely to be similar to the distribution of testing data. Hence, we can estimate the missing values.
 In the decision tree implementation in the following section, I used the latter approach.
@@ -204,7 +209,23 @@ maxDepth & Validation data & Test data \\ \hline \hline
 \end{center}
 \end{table}
 
-The results of my decision tree on the validation and testing data are shown in Table \ref{tab:result}. Since the testing data is not available beforehand, we have to choose the best maxDepth only based on the results on the validation data. Thus, we choose $maxDepth=1$, and we get 0.52238 as the accuracy. Note that this result is better than the case of $maxDepth=0$, which is a baseline, but there is significant difference in the accuracy between the results on validation and training data. This is probably because of the different distribution of values in the feature space.
+The results of my decision tree on the validation and testing data are shown in Table \ref{tab:result}. Since the testing data is not available beforehand, we have to choose the best maxDepth only based on the results on the validation data. Thus, we choose $maxDepth=1$, and we get 0.52238 as the accuracy. Note that this result is better than the case of $maxDepth=0$, which is a baseline, but there is significant difference in the accuracy between the results on validation and training data.
+
+This poor performance is caused by the different distribution of values in the feature space. To investigate more details, I created the decision tree from the test data as well in order to compare its structure with the one from the training data (Figure \ref{fig:comparison}). The decision tree learned from the training data uses 9th attribute for the root node, while the one learned from the test data uses 11th attribute. This difference implies the different distribution of the two data. Figure \ref{fig:comparison2} shows the entropy of each node when the decision tree learned from the training data is applied to the test data. Although this decision tree fits the training data very well, the root node splits the test data very poorly, resulting in high entropy. These results indicate that the distribution of the training data and test data are significantly different, and this causes the poor performance of the resulting decision tree on the test data.
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=150mm]{figure2.png}
+\caption{Comparison of the decision trees.}
+\label{fig:comparison}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=70mm]{figure3.png}
+\caption{The entropy of each node when the decision tree is applied to the test data.}
+\label{fig:comparison2}
+\end{figure}
 
 \end{enumerate}
 

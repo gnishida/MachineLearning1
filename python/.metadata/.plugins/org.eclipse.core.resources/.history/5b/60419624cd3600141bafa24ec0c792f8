@@ -114,7 +114,8 @@ def DecisionTree2(maxDepth):
 	attrs = {0: "B", 1: "C", 2: "C", 3: "B", 4: "B", 5: "B", 6: "B", 7: "C", 8: "B", 9: "B", 10: "C", 11: "B", 12: "B", 13: "C", 14: "C"}
 
 	# create a decision tree
-	examples = readData("train.txt")
+	#examples = readData("train.txt")
+	examples = readData("test.txt")
 	rootNode = buildDecisionTree(attrs, examples, maxDepth)
 	rootNode.display(0)
 
@@ -297,15 +298,13 @@ def findThresholds(examples, attr_index):
 	previous_label = examples2[0].label
 	previous_value = float(examples2[0].row[attr_index])
 	for example2 in examples2:
-		if previous_label == "?" and previous_value == float(example2.row[attr_index]): continue
-
 		if example2.label != previous_label:
 			previous_label = example2.label
 
 			if previous_value == float(example2.row[attr_index]):
 				previous_label = "?"
-			else:
-				thresholds.append((previous_value + float(example2.row[attr_index])) * 0.5)
+
+			thresholds.append((previous_value + float(example2.row[attr_index])) * 0.5)
 		previous_value = float(example2.row[attr_index])
 
 	return thresholds
@@ -396,5 +395,6 @@ def readData(filename):
 	return examples
 
 if __name__ == '__main__':
-	labels = DecisionTree()
+	#labels = DecisionTree()
+	labels = DecisionTree2(3)
 	Check.eval(labels[0], labels[1], labels[2], labels[3])
