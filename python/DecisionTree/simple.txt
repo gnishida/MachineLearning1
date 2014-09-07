@@ -1,0 +1,4 @@
+Y	Detective	Blue	+
+N	Detective	Blue	+
+Y	Romance	Blue	-
+N	Romance	Blue	+
