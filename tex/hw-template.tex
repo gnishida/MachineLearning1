@@ -87,17 +87,17 @@ Training set is a set of data used to optimize a hypothesis function.
 
 \item test set
 
-Test set is a set of real-world data used to measure the accuracy of the hypothesis generated through training and validation phases.
+Test set is a set of data used to measure the accuracy of the hypothesis generated through training and validation phases.
 
 \item validation set
 
-Validation set is a set of data used to estimate the performance of the hypothesis during the training phase.
+Validation set is a set of data used to estimate the performance of the hypothesis and to generalize the hypothesis preventing from overfitting.
 
 \end{itemize}
 
 \item Can you use the validation set as a test set?
 
-No. Since validation set is used to estimate the accuracy of the hypothesis during the training phase, the resulting hypothesis is optimized for the validation set, and it is meaningless to use the validation set as a test set in order to measure the actual performance for the real-world data.
+Technically yes, but practically no, because it is meaningless. Since validation set is used to estimate the accuracy of the hypothesis during the training phase, the resulting hypothesis is optimized for the validation set, and it is meaningless to use the validation set as a test set in order to measure the actual performance of the hypothesis.
 
 \item Define in one sentence: overfitting
 
@@ -108,11 +108,11 @@ A hypothesis is said to overfit the training data if it has smaller error on the
 \begin{itemize}
 \item (1) can we say that $f$ overfits to the training data?
 
-False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. In this case, $e_{tr} > e_{ts}$, which indicates that $f$ is generalized very well.
+False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. In this case, $e_{tr} > e_{ts}$, which indicates that $e_{ts}$ is very small and $f$ is generalized very well.
 
 \item (2) Now, assume that $e_{tr} < e_{ts}$, does $f$ overfit to the training data?
 
-False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. Therefore, we cannot conclude that $f$ overfits to the training data even if $e_{tr} < e_{ts}$, unless we find another hypothesis $f'$ which has larger error on the training data but smaller error on the test data compared to $f$.
+False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. The optimal hypothesis minimizes $e_{ts}$, but still it may be the case that $e_{tr} < e_{ts}$. Therefore, we cannot conclude that $f$ overfits to the training data even if $e_{tr} < e_{ts}$, unless we find another hypothesis $f'$ which has larger error on the training data but smaller error on the test data compared to $f$.
 
 \end{itemize}
 
@@ -133,9 +133,9 @@ The number of examples labeled "Buy=Y" is 7, while the number of examples labele
 
 \item What are the attributes considered by the algorithm?
 
-All the attributes, "Pages", "Famous Author", "Category", and "Cover Color" should be considered by the algorithm. However, for "Pages", since it is a continuous attribute, we first have to sort examples according to the values of "Pages" and check the mid-point as a possible threshold in order to discretize. The sorted values are as follows:\\
+All the attributes, "Pages", "Famous Author", "Category", and "Cover Color" should be considered by the algorithm. For "Pages", since it is a continuous attribute, we first have to sort examples according to the values of "Pages" and check the mid-point as a possible threshold in order to discretize. The sorted values are as follows:\\
 45(-), 50(+), 72(+), 100(-), 120(+), 142(+), 150(+), 200(-), 300(+), 350(+), 1000(-).\\
-Thus, the possible thresholds for "Pages" are 47.5, 86, 110, 175, 250, and 675. These values are called cut points \cite{fayyad1992}, and used to split the continuous space into two ranges so that the continuous values can be handled in the same manner with the discrete values.
+Thus, the possible thresholds for "Pages" are 47.5, 86, 110, 175, 250, and 675. These thresholds are called cut points \cite{fayyad1992}, and used to split the continuous space into two ranges so that the continuous values can be handled in the same manner with the discrete values. Note that the thresholds have to be calculated for every node, since the set of the continuous values for each node may differ from the root node.
 
 \item What is the first attribute that the algorithm will split the data on? What is its information gain?
 
@@ -173,21 +173,19 @@ Same as threshold=47.5, which is 0.14449.
 0.94566 - \left[ \left( -\frac{6}{9} \log \frac{6}{9} -\frac{3}{9} \log \frac{3}{9} \right) \times \frac{9}{11} + 1.0 \times \frac{2}{11} \right]\\ = 0.94566 - 0.93315 = 0.01251
 \end{eqnarray*}
 \end{itemize}
-The attribute which produces the highest gain is "Pages", so we should use "Pages" as the first attribute to split, and its information gain is 0.14449 if we use threshold=47.5 or 675.
-Note that if we split all the values of "Pages", then we will easily be able to separate the labels with information gain = 1.0. However, this will be overfitting, and we do not want to do that.
+The attribute which achieves the highest information gain is "Pages" with 47.5 or 675 as the threshold, so we should use "Pages" as the first attribute to split, and the information gain is 0.14449.
+Note that if we split all the values of "Pages", then we will be able to completely separate the labels with the weighted averaged of the entropy = 0.0. However, this will be overfitting, and we do not want to do that.
 
 \item Due to a computer error some of the training examples attributes were deleted! Revise the decision tree training algorithm to deal with missing values in the training data.
 
-The goal of training is to minimize the expected loss over the distribution of values of attributes. Intuitively, it is better to use this distribution to estimate the missing values, but, we do not know the distribution in advance. One option would be to assume that the missing values can be all the possible values with equal probability. 
+The goal of training is to minimize the expected loss over the distribution of values of attributes. Intuitively, it is better to use this distribution to estimate the missing values, but, we do not know the distribution in advance. One option would be to choose the majority votes for the missing values. Suppose the first row in our training data does not have a value of "Famous Author". If we use "Famous Author" as the first attribute to split the tree, then we assign "Y" for the first row, becuase "Y" is the majority. Although this options is easy to implement, the minority values may be ignored during the decision tree building.
 
-Suppose the first example in our training data does not have a value of "Famous Author". If we use "Famous Author" as the first attribute to split the tree, then this example will contribute a half to each sub-tree. In other words, the subset $S_Y$ for which attribute "Famous Author" has value "Y" will contain 5.5 examples, while the other subset $S_N$ will have 4.5 examples. Also, since the first example is labeled "Buy=Y", in each subset, this example contributes 0.5 to the positive proportion for computing entropy, and the information gain can be computed in the similar manner. 
-Another option is to use the proportion of each sub-tree as a probability of having the corresponding value. If we have enough number of training data without missing values, the proportion of the sub-trees are likely to be similar to the distribution of testing data. Hence, we can estimate the missing values.
-In the decision tree implementation in the following section, I used the latter approach.
+Another option is to use the probability distribution according to the training data. If we have enough number of training data without missing values, the distribution of the values in the training data is likely to be similar to the one of testing data. Hence, it is reasonable to use the distribution of the values in the training data to estimate the missing values. In the same example above, in which the first row of the training data has missing value for "Famous Author", we get "Y" with probability 0.6 and "N" with probability 0.4. Based on this, the first row contributes 0.6 to the sub-tree for "Y", while it contirbutes 0.4 to the other sub-tree for "N". In the decision tree implementation in the following section, I used the latter approach.
 \end{itemize}
 
 \item Decision Tree Implementation
 
-I implemented the decision tree algorithm using the second option for the missing values. With regard to the continuous values, for every node, I used each cut point discussed above as a candidate of the attribute in addition to the discrete attributes, and choose the best one which produces the highest information gain. Also, the validation data was used to find the best maxDepth, and measure the performance of the resulting decision tree on the test data. Please refer to the attached source code for details.
+I implemented the decision tree algorithm using the second option for the missing values. With regard to the continuous values, for every node, I computed the expected information gain for each cut point discussed above in addition to the discrete attributes, and choose the best one which achieves the highest information gain. Also, the validation data was used to find the best maxDepth, changing from 0 to 20. Finally, the performance of the resulting decision tree was measured on the test data. Please refer to the attached source code for details.
 
 \begin{table}[htb]
 \begin{center}
@@ -209,9 +207,9 @@ maxDepth & Validation data & Test data \\ \hline \hline
 \end{center}
 \end{table}
 
-The results of my decision tree on the validation and testing data are shown in Table \ref{tab:result}. Since the testing data is not available beforehand, we have to choose the best maxDepth only based on the results on the validation data. Thus, we choose $maxDepth=1$, and we get 0.52238 as the accuracy. Note that this result is better than the case of $maxDepth=0$, which is a baseline, but there is significant difference in the accuracy between the results on validation and training data.
+The results of my decision tree on the validation and testing data are shown in Table \ref{tab:result}. Since the testing data is not available beforehand, we have to choose the best maxDepth only based on the results on the validation data. Thus, we choose $maxDepth=1$, and we get 0.52238 as the accuracy on the test data. Note that this result is better than the case of $maxDepth=0$, which is a baseline, but there is significant difference in the accuracy between the results on validation and training data.
 
-This poor performance is caused by the different distribution of values in the feature space between the training data and the test data. To investigate more details, I computed the distribution of labels in the child nodes of the root node as shown in Figure \ref{fig:comparison}. The results indicate that the distribution of the values of 9th attribute against the labels is significantly different between the training data and the test data. In the training data, most data with the value "t" for the 9th attribute have positive labels, while most data with the value "f" for the 9th attribute have negative labels. This leads to high low entropy, i.e. high information gain. In the test data, on the other hand, both subsets have both labels almost evenly, which results in very high entroy, i.e. low information gain. Hence, the decision tree trained from the training data could not get high accuracy on the test data.
+This poor performance is caused by the different distribution of values in the feature space between the training data and the test data. To investigate more details, I computed the distribution of labels in the child nodes of the root node as shown in Figure \ref{fig:comparison}. The results indicate that the distribution of the values of 9th attribute against the labels is significantly different between the training data and the test data. In the training data, most data with the value "t" for the 9th attribute have positive labels, while most data with the value "f" for the 9th attribute have negative labels. This polarization leads to low entropy, i.e. high information gain. In the test data, on the other hand, both subsets have both labels almost evenly, which results in very high entroy, i.e. low information gain. Hence, the decision tree trained from the training data could not get high accuracy on the test data.
 
 \begin{figure}[hbtp]
 \centering
