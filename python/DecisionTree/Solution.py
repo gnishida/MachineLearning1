@@ -1,7 +1,6 @@
 import math
 import copy
 import Check
-from statsmodels.sandbox.distributions import examples
 
 # Example
 class Example:
@@ -85,16 +84,13 @@ def DecisionTree():
 	# read validation data
 	validations = readData("validation.txt")
 
-	# read test data
-	tests = readData("test.txt")
-
-	maxDepth = findBestMaxDepth(attrs, examples, validations, tests)
+	maxDepth = findBestMaxDepth(attrs, examples, validations)
 
 	print("best maxDepth: " + str(maxDepth))
 
-	return DecisionTree2(maxDepth)
+	return DecisionTreeBounded(maxDepth)
 
-def DecisionTree2(maxDepth):
+def DecisionTreeBounded(maxDepth):
 	#TODO: Your code starts from here.
 	#      This function should return a list of labels.
 	#      e.g.:
@@ -116,7 +112,7 @@ def DecisionTree2(maxDepth):
 	# create a decision tree
 	examples = readData("train.txt")
 	rootNode = buildDecisionTree(attrs, examples, maxDepth)
-	rootNode.display(0)
+	#rootNode.display(0)
 
 	predicted_labels = predict(rootNode, examples)
 	for i in xrange(len(predicted_labels)):
@@ -132,16 +128,11 @@ def DecisionTree2(maxDepth):
 
 	return labels
 
-def findBestMaxDepth(attrs, examples, validations, tests):
+def findBestMaxDepth(attrs, examples, validations):
 	# ground truth labels of validation data
 	vali_labels = []
 	for v in validations:
 		vali_labels.append(v.label)
-
-	# ground truth labels of test data
-	test_labels = []
-	for v in tests:
-		test_labels.append(v.label)
 
 	max_accuracy = 0.0
 	best_maxDepth = -1
@@ -152,15 +143,10 @@ def findBestMaxDepth(attrs, examples, validations, tests):
 		predicted_labels = predict(rootNode, validations)
 
 		a = accuracy(vali_labels, predicted_labels)
-		print("maxDepth " + str(i) + ": accuracy=" + str(a))
+		print("maxDepth " + str(i) + ": accuracy on validation data = " + str(a))
 		if  a > max_accuracy:
 			max_accuracy = a
 			best_maxDepth = i
-
-		# predict labels for validation data
-		predicted_labels = predict(rootNode, tests)
-		a = accuracy(test_labels, predicted_labels)
-		print("   accuracy for tests = " + str(a))
 
 	return best_maxDepth
 

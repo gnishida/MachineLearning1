@@ -1,8 +1,8 @@
 -- VERSION_4
 -- START DISKCACHE
-C:\Users\gen\Documents\GitHub\MachineLearning1\python\.metadata\.plugins\org.eclipse.core.resources\.projects\DecisionTree\com.python.pydev.analysis\v2_indexcache
-Check|1409959137429|C:\Users\gen\Documents\GitHub\MachineLearning1\python\DecisionTree\Check.py
-Solution|1410122172122|C:\Users\gen\Documents\GitHub\MachineLearning1\python\DecisionTree\Solution.py
+D:\GitHub\MachineLearning1\python\.metadata\.plugins\org.eclipse.core.resources\.projects\DecisionTree\com.python.pydev.analysis\v2_indexcache
+Check|1410293377498|D:\GitHub\MachineLearning1\python\DecisionTree\Check.py
+Solution|1410377184858|D:\GitHub\MachineLearning1\python\DecisionTree\Solution.py
 -- END DISKCACHE
 -- START DICTIONARY
 6
@@ -14,7 +14,7 @@ Solution|1410122172122|C:\Users\gen\Documents\GitHub\MachineLearning1\python\Dec
 1=Solution
 -- END DICTIONARY
 -- START TREE 1
-19
+16
 acc|2|accuracy!10@accuracy!18@
 bui|1|buildDecisionTree!10@
 cre|1|createSubTree!10@
@@ -22,14 +22,11 @@ dec|2|DecisionTree2!10@DecisionTree!10@
 ent|1|entropy!10@
 eva|1|eval!18@
 exa|1|Example!9@
-f|1|f!19@
 fin|3|findBestMaxDepth!10@findThresholds!10@findBestAttribute!10@
 isa|1|isAllExampleLabeledSame!10@
-lab|1|labels!19@
 mos|1|mostCommonLabel!10@
 pre|1|predict!10@
 rea|2|readData!10@readfile!18@
-row|1|rows!19@
 spl|1|split!10@
 tot|1|totalEntropy!10@
 tre|1|TreeNode!9@

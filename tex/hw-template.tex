@@ -211,20 +211,13 @@ maxDepth & Validation data & Test data \\ \hline \hline
 
 The results of my decision tree on the validation and testing data are shown in Table \ref{tab:result}. Since the testing data is not available beforehand, we have to choose the best maxDepth only based on the results on the validation data. Thus, we choose $maxDepth=1$, and we get 0.52238 as the accuracy. Note that this result is better than the case of $maxDepth=0$, which is a baseline, but there is significant difference in the accuracy between the results on validation and training data.
 
-This poor performance is caused by the different distribution of values in the feature space. To investigate more details, I created the decision tree from the test data as well in order to compare its structure with the one from the training data (Figure \ref{fig:comparison}). The decision tree learned from the training data uses 9th attribute for the root node, while the one learned from the test data uses 11th attribute. This difference implies the different distribution of the two data. Figure \ref{fig:comparison2} shows the entropy of each node when the decision tree learned from the training data is applied to the test data. Although this decision tree fits the training data very well, the root node splits the test data very poorly, resulting in high entropy. These results indicate that the distribution of the training data and test data are significantly different, and this causes the poor performance of the resulting decision tree on the test data.
+This poor performance is caused by the different distribution of values in the feature space between the training data and the test data. To investigate more details, I computed the distribution of labels in the child nodes of the root node as shown in Figure \ref{fig:comparison}. The results indicate that the distribution of the values of 9th attribute against the labels is significantly different between the training data and the test data. In the training data, most data with the value "t" for the 9th attribute have positive labels, while most data with the value "f" for the 9th attribute have negative labels. This leads to high low entropy, i.e. high information gain. In the test data, on the other hand, both subsets have both labels almost evenly, which results in very high entroy, i.e. low information gain. Hence, the decision tree trained from the training data could not get high accuracy on the test data.
 
 \begin{figure}[hbtp]
 \centering
 \includegraphics[width=150mm]{figure2.png}
-\caption{Comparison of the decision trees.}
+\caption{Comparison of the entropy between the training data and the test data: The splitting by the 9th attribute on the training data achieves very low entroy, whose weighted average is 0.35332. This is why the 9th attribute was selected as the root node for the decision treee. On the other hand, the splitting by the same attribute on the test data results in very high entroy, whose weighted average is 0.99671. This indicates that the distribution of the 9th values against the labels are significantly different between the training data and the test data, and this causes very poor performance of the decision tree on the test data.}
 \label{fig:comparison}
-\end{figure}
-
-\begin{figure}[hbtp]
-\centering
-\includegraphics[width=70mm]{figure3.png}
-\caption{The entropy of each node when the decision tree is applied to the test data.}
-\label{fig:comparison2}
 \end{figure}
 
 \end{enumerate}

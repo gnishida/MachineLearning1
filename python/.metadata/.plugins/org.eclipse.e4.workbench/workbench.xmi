@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_RucT4TXWEeSULKolmFQTnw" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_RucT4jXWEeSULKolmFQTnw" bindingContexts="_RucT6DXWEeSULKolmFQTnw">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;weather.txt&quot; tooltip=&quot;DecisionTree/weather.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/weather.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;Solution.py&quot; tooltip=&quot;DecisionTree/Solution.py&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/Solution.py&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;train.txt&quot; tooltip=&quot;DecisionTree/train.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/train.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;validation.txt&quot; tooltip=&quot;DecisionTree/validation.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/validation.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;test.txt&quot; tooltip=&quot;DecisionTree/test.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/test.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;train2.txt&quot; tooltip=&quot;DecisionTree/train2.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/train2.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;simple.txt&quot; tooltip=&quot;DecisionTree/simple.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/simple.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;description.txt&quot; tooltip=&quot;DecisionTree/description.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/description.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;Check.py&quot; tooltip=&quot;DecisionTree/Check.py&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/Check.py&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;Solution.py&quot; tooltip=&quot;DecisionTree/Solution.py&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/Solution.py&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;weather.txt&quot; tooltip=&quot;DecisionTree/weather.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/weather.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;train.txt&quot; tooltip=&quot;DecisionTree/train.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/train.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;validation.txt&quot; tooltip=&quot;DecisionTree/validation.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/validation.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;test.txt&quot; tooltip=&quot;DecisionTree/test.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/test.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;train2.txt&quot; tooltip=&quot;DecisionTree/train2.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/train2.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;simple.txt&quot; tooltip=&quot;DecisionTree/simple.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/simple.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;com.brainwy.liclipse.editor.common.LiClipseEditor&quot; name=&quot;description.txt&quot; tooltip=&quot;DecisionTree/description.txt&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/description.txt&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;Check.py&quot; tooltip=&quot;DecisionTree/Check.py&quot;>&#xD;&#xA;&lt;persistable path=&quot;/DecisionTree/Check.py&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_RucT4jXWEeSULKolmFQTnw" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_y9O0AjXWEeSULKolmFQTnw" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="1041" height="941">
@@ -104,8 +104,8 @@
               <children xsi:type="advanced:Placeholder" xmi:id="_3--aIzXXEeSLtLOrZEevaQ" elementId="org.python.pydev.navigator.view" ref="_3-4TgDXXEeSLtLOrZEevaQ"/>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_3--aJDXXEeSLtLOrZEevaQ" containerData="7947" selectedElement="_3--aJTXXEeSLtLOrZEevaQ">
-              <children xsi:type="advanced:Placeholder" xmi:id="_3--aJTXXEeSLtLOrZEevaQ" elementId="org.eclipse.ui.editorss" containerData="6867" ref="_zDjecDXWEeSULKolmFQTnw"/>
-              <children xsi:type="basic:PartStack" xmi:id="_3--aJjXXEeSLtLOrZEevaQ" elementId="bottom" containerData="3133" selectedElement="_fM3V8TXYEeSLtLOrZEevaQ">
+              <children xsi:type="advanced:Placeholder" xmi:id="_3--aJTXXEeSLtLOrZEevaQ" elementId="org.eclipse.ui.editorss" containerData="6547" ref="_zDjecDXWEeSULKolmFQTnw"/>
+              <children xsi:type="basic:PartStack" xmi:id="_3--aJjXXEeSLtLOrZEevaQ" elementId="bottom" containerData="3453" selectedElement="_3--aKDXXEeSLtLOrZEevaQ">
                 <tags>newtablook</tags>
                 <tags>org.eclipse.e4.secondaryDataStack</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_3--aJzXXEeSLtLOrZEevaQ" elementId="org.eclipse.search.ui.views.SearchView" toBeRendered="false" ref="_3-4TgTXXEeSLtLOrZEevaQ"/>
@@ -143,7 +143,7 @@
         <tags>EditorStack</tags>
         <tags>active</tags>
         <children xsi:type="basic:Part" xmi:id="_6Kjg4DXXEeSLtLOrZEevaQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Solution" iconURI="platform:/plugin/org.python.pydev/icons/python_file.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;Solution.py&quot; partName=&quot;Solution&quot; title=&quot;Solution&quot; tooltip=&quot;DecisionTree/Solution.py&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/DecisionTree/Solution.py&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;10998&quot; selectionTopPixel=&quot;5440&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;Solution.py&quot; partName=&quot;Solution&quot; title=&quot;Solution&quot; tooltip=&quot;DecisionTree/Solution.py&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/DecisionTree/Solution.py&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4266&quot; selectionTopPixel=&quot;1530&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.python.pydev.editor.PythonEditor</tags>
           <tags>removeOnHide</tags>
@@ -239,7 +239,7 @@
       <toolbar xmi:id="_zMW1ITXWEeSULKolmFQTnw" elementId="org.eclipse.ui.views.TaskList"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_3-4TgDXXEeSLtLOrZEevaQ" elementId="org.python.pydev.navigator.view" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="PyDev Package Explorer" iconURI="platform:/plugin/org.python.pydev/icons/pydev_package_explorer.gif" closeable="true">
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;>&#xD;&#xA;&lt;expanded IMemento.internal.id=&quot;C:/Users/gen/Documents/GitHub/MachineLearning1/python/DecisionTree&quot;/>&#xD;&#xA;&lt;selected IMemento.internal.id=&quot;C:/Users/gen/Documents/GitHub/MachineLearning1/python/DecisionTree/weather.txt&quot;/>&#xD;&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;>&#xD;&#xA;&lt;expanded IMemento.internal.id=&quot;D:/GitHub/MachineLearning1/python/DecisionTree&quot;/>&#xD;&#xA;&lt;selected IMemento.internal.id=&quot;D:/GitHub/MachineLearning1/python/DecisionTree/Solution.py&quot;/>&#xD;&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:PyDev</tags>
       <menus xmi:id="_4AZ9gDXXEeSLtLOrZEevaQ" elementId="org.python.pydev.navigator.view">
@@ -256,12 +256,11 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
-      <tags>highlighted</tags>
       <menus xmi:id="_d1CAUDXYEeSLtLOrZEevaQ" elementId="org.eclipse.ui.console.ConsoleView">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
       </menus>
-      <toolbar xmi:id="_d1CAUTXYEeSLtLOrZEevaQ" elementId="org.eclipse.ui.console.ConsoleView" visible="false"/>
+      <toolbar xmi:id="_d1CAUTXYEeSLtLOrZEevaQ" elementId="org.eclipse.ui.console.ConsoleView"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_3-4TgzXXEeSLtLOrZEevaQ" elementId="org.eclipse.ui.views.ProgressView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Progress" iconURI="platform:/plugin/org.eclipse.ui.ide/icons/full/eview16/pview.png" closeable="true">
       <tags>View</tags>
@@ -275,7 +274,7 @@
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
       </menus>
-      <toolbar xmi:id="_fNb9sTXYEeSLtLOrZEevaQ" elementId="org.eclipse.debug.ui.DebugView"/>
+      <toolbar xmi:id="_fNb9sTXYEeSLtLOrZEevaQ" elementId="org.eclipse.debug.ui.DebugView" visible="false"/>
     </sharedElements>
     <trimBars xmi:id="_RucT4zXWEeSULKolmFQTnw" elementId="org.eclipse.ui.main.toolbar" contributorURI="platform:/plugin/org.eclipse.ui.workbench">
       <children xsi:type="menu:ToolBar" xmi:id="_y-h0gDXWEeSULKolmFQTnw" elementId="group.file" toBeRendered="false">
@@ -284,7 +283,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y-h0gjXWEeSULKolmFQTnw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_CkKAhTbSEeSYtcNqWDXq2g" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_RvTQJzXWEeSULKolmFQTnw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_RXx99zkkEeS2UvvAEvcFuA" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_RvTQJzXWEeSULKolmFQTnw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y-h0gzXWEeSULKolmFQTnw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -305,7 +304,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y-n7IDXWEeSULKolmFQTnw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_CkQHKTbSEeSYtcNqWDXq2g" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_RvNJBjXWEeSULKolmFQTnw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_RX7u-TkkEeS2UvvAEvcFuA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_RvNJBjXWEeSULKolmFQTnw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y-n7ITXWEeSULKolmFQTnw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
