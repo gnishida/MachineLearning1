@@ -2,7 +2,7 @@
 -- START DISKCACHE
 D:\GitHub\MachineLearning1\python\.metadata\.plugins\org.eclipse.core.resources\.projects\DecisionTree\com.python.pydev.analysis\v2_indexcache
 Check|1410293377498|D:\GitHub\MachineLearning1\python\DecisionTree\Check.py
-Solution|1410377184858|D:\GitHub\MachineLearning1\python\DecisionTree\Solution.py
+Solution|1410379091390|D:\GitHub\MachineLearning1\python\DecisionTree\Solution.py
 -- END DISKCACHE
 -- START DICTIONARY
 6
@@ -18,7 +18,7 @@ Solution|1410377184858|D:\GitHub\MachineLearning1\python\DecisionTree\Solution.p
 acc|2|accuracy!10@accuracy!18@
 bui|1|buildDecisionTree!10@
 cre|1|createSubTree!10@
-dec|2|DecisionTree2!10@DecisionTree!10@
+dec|2|DecisionTree!10@DecisionTreeBounded!10@
 ent|1|entropy!10@
 eva|1|eval!18@
 exa|1|Example!9@

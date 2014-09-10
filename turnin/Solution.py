@@ -1,7 +1,5 @@
 import math
-import copy
 import Check
-from statsmodels.sandbox.distributions import examples
 
 # Example
 class Example:
@@ -79,13 +77,19 @@ def DecisionTree():
 	# define the attributes
 	attrs = {0: "B", 1: "C", 2: "C", 3: "B", 4: "B", 5: "B", 6: "B", 7: "C", 8: "B", 9: "B", 10: "C", 11: "B", 12: "B", 13: "C", 14: "C"}
 
-	maxDepth = findBestMaxDepth(attrs, examples)
+	# read training data
+	examples = readData("train.txt")
+
+	# read validation data
+	validations = readData("validation.txt")
+
+	maxDepth = findBestMaxDepth(attrs, examples, validations)
 
 	print("best maxDepth: " + str(maxDepth))
 
-	return DecisionTree2(best_maxDepth)
+	return DecisionTreeBounded(maxDepth)
 
-def DecisionTree2(maxDepth):
+def DecisionTreeBounded(maxDepth):
 	#TODO: Your code starts from here.
 	#      This function should return a list of labels.
 	#      e.g.:
@@ -104,10 +108,8 @@ def DecisionTree2(maxDepth):
 	# define the attributes
 	attrs = {0: "B", 1: "C", 2: "C", 3: "B", 4: "B", 5: "B", 6: "B", 7: "C", 8: "B", 9: "B", 10: "C", 11: "B", 12: "B", 13: "C", 14: "C"}
 
-	# read training data
-	examples = readData("train.txt")
-
 	# create a decision tree
+	examples = readData("train.txt")
 	rootNode = buildDecisionTree(attrs, examples, maxDepth)
 	#rootNode.display(0)
 
@@ -125,18 +127,22 @@ def DecisionTree2(maxDepth):
 
 	return labels
 
-def findBestMaxDepth(attrs, examples):
+def findBestMaxDepth(attrs, examples, validations):
+	# ground truth labels of validation data
+	vali_labels = []
+	for v in validations:
+		vali_labels.append(v.label)
+
 	max_accuracy = 0.0
 	best_maxDepth = -1
 	for i in xrange(20):
 		rootNode = buildDecisionTree(attrs, examples, i)
 
-		# read validation data and predict labels
-		tests = readData("validation.txt")
-		predicted_labels = predict(rootNode, tests)
+		# predict labels for validation data
+		predicted_labels = predict(rootNode, validations)
 
-		a = accuracy(tests, predicted_labels)
-		print("maxDepth " + str(i) + ": accuracy=" + str(a))
+		a = accuracy(vali_labels, predicted_labels)
+		print("maxDepth " + str(i) + ": accuracy on validation data = " + str(a))
 		if  a > max_accuracy:
 			max_accuracy = a
 			best_maxDepth = i
@@ -276,9 +282,15 @@ def findThresholds(examples, attr_index):
 	previous_label = examples2[0].label
 	previous_value = float(examples2[0].row[attr_index])
 	for example2 in examples2:
+		if previous_label == "?" and previous_value == float(example2.row[attr_index]): continue
+
 		if example2.label != previous_label:
 			previous_label = example2.label
-			thresholds.append((previous_value + float(example2.row[attr_index])) * 0.5)
+
+			if previous_value == float(example2.row[attr_index]):
+				previous_label = "?"
+			else:
+				thresholds.append((previous_value + float(example2.row[attr_index])) * 0.5)
 		previous_value = float(example2.row[attr_index])
 
 	return thresholds
