@@ -79,40 +79,40 @@ The hyperplane has it normal vector $\omega$, and it is away from the origin by 
 
 \section{Basic Concepts}
 \begin{enumerate}
-\item Define in one sentence: (1) training set, (2) test set, (3) validation set.
+\item Define in one sentence: (1) training set, (2) test set, (3) validation set. Your definition should use the notation described in class.
 \begin{itemize}
 \item training set
 
-Training set is a set of data used to optimize a hypothesis function.
+Training set $S_{ts}$ is a set of data $(x, y) \in S_{ts}$, where $x$ is a instance and $y$ is a label, which is used to optimize a hypothesis function $f$ by increasing the accuracy $\Pr(f(x)=y)$.
 
 \item test set
 
-Test set is a set of data used to measure the accuracy of the hypothesis generated through training and validation phases.
+Test set $S_{ts}$ is a set of data $(x, y) \in S_{ts}$, where $x$ is a instance, $y$ is a label, and $S_{ts} \cap S_{tr} = \phi$, which is used to compute $\Pr(f(x)=y)$ as the performance of the hypothesis $f$.
 
 \item validation set
 
-Validation set is a set of data used to estimate the performance of the hypothesis and to generalize the hypothesis preventing from overfitting.
+Validation set $S_{v}$ is a set of data $(x, y) \in S_{v}$, where $x$ is a instance, $y$ is a label, $S_{v} \cap S_{tr} = \phi$, and $S_{v} \cap S_{ts} = \phi$, which is used to estimate the performance of the hypothesis $f$ by computing $\Pr(f(x)=y)$ and to generalize $f$ preventing from overfitting the training data.
 
 \end{itemize}
 
 \item Can you use the validation set as a test set?
 
-Technically yes, but practically no, because it is meaningless. Since validation set is used to estimate the accuracy of the hypothesis during the training phase, the resulting hypothesis is optimized for the validation set, and it is meaningless to use the validation set as a test set in order to measure the actual performance of the hypothesis.
+No. The validation set has to be disjoint from the test set. Since validation set is used to estimate the accuracy of the hypothesis during the training phase, the resulting hypothesis is optimized for the validation set, and it is meaningless to use the validation set as a test set in order to measure the actual performance of the hypothesis.
 
 \item Define in one sentence: overfitting
 
-A hypothesis is said to overfit the training data if it has smaller error on the training data but loses the generalization performance and has larger error on test data.
+A hypothesis $f$ is said to overfit the training data $(x_{tr}, y_{tr}) \in S_{tr}$ if it has smaller error $e_{tr} = 1 - \Pr(f(x_{tr})=y_{tr})$ on the training data but loses the generalization performance and has larger error $e_{ts} = 1 - \Pr(f(x_{ts})=y_{ts})$ on test data $(x_{ts}, y_{ts}) \in S_{ts}$.
 
 \item True or False (and why): A learned hypothesis $f$ has a training error $e_{tr}$ and a testing error $e_{ts}$, where $e_{tr} > e_{ts}$.
 
 \begin{itemize}
 \item (1) can we say that $f$ overfits to the training data?
 
-False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. In this case, $e_{tr} > e_{ts}$, which indicates that $e_{ts}$ is very small and $f$ is generalized very well.
+False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. In this case, $e_{tr} > e_{ts}$, which indicates that $e_{ts}$ is very small and $f$ is generalized very well in this sense.
 
 \item (2) Now, assume that $e_{tr} < e_{ts}$, does $f$ overfit to the training data?
 
-False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. The optimal hypothesis minimizes $e_{ts}$, but still it may be the case that $e_{tr} < e_{ts}$. Therefore, we cannot conclude that $f$ overfits to the training data even if $e_{tr} < e_{ts}$, unless we find another hypothesis $f'$ which has larger error on the training data but smaller error on the test data compared to $f$.
+False. Since the hypothesis $f$ is optimized for the training data while the test data is unknown during training phase, the training error $e_{tr}$ is smaller than $e_{ts}$ in general, even if $f$ is well generalized. The optimal hypothesis minimizes $e_{ts}$, but still it might be the case that $e_{tr} < e_{ts}$. Therefore, we cannot conclude that $f$ overfits the training data even if $e_{tr} < e_{ts}$, unless we find another hypothesis $f'$ which has larger error on the training data but smaller error on the test data compared to $f$.
 
 \end{itemize}
 
