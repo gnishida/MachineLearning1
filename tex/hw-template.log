@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.10)  11 SEP 2014 13:18
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.10)  11 SEP 2014 16:01
 entering extended mode
 **D:/GitHub/MachineLearning1/tex/hw-template.tex
 (D:/GitHub/MachineLearning1/tex/hw-template.tex
@@ -164,15 +164,15 @@ itHub/MachineLearning1/tex/figure1.png>] [3] [4] [5]
 <figure2.png, id=29, 1348.28719pt x 232.61906pt>
 File: figure2.png Graphic file (type png)
  <use figure2.png>
-Package pdftex.def Info: figure2.png used on input line 216.
+Package pdftex.def Info: figure2.png used on input line 218.
 (pdftex.def)             Requested size: 426.79134pt x 73.63388pt.
- [6 <D:/GitHub/MachineLearning1/tex/figure2.png>] [7]
+ [6] [7 <D:/GitHub/MachineLearning1/tex/figure2.png>]
 (D:\GitHub\MachineLearning1\tex\hw-template.aux) ) 
 Here is how much of TeX's memory you used:
- 1457 strings out of 493921
- 19416 string characters out of 3144867
- 79011 words of memory out of 3000000
- 4755 multiletter control sequences out of 15000+200000
+ 1459 strings out of 493921
+ 19442 string characters out of 3144867
+ 78017 words of memory out of 3000000
+ 4757 multiletter control sequences out of 15000+200000
  10195 words of font info for 38 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  36i,9n,24p,1000b,365s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -188,7 +188,7 @@ public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb>
-Output written on hw-template.pdf (7 pages, 184043 bytes).
+Output written on hw-template.pdf (7 pages, 187737 bytes).
 PDF statistics:
  72 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

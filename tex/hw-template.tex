@@ -137,6 +137,8 @@ All the attributes, "Pages", "Famous Author", "Category", and "Cover Color" shou
 45(-), 50(+), 72(+), 100(-), 120(+), 142(+), 150(+), 200(-), 300(+), 350(+), 1000(-).\\
 Thus, the possible thresholds for "Pages" are 47.5, 86, 110, 175, 250, and 675. These thresholds are called cut points \cite{fayyad1992}, and used to split the continuous space into two ranges so that the continuous values can be handled in the same manner with the discrete values. Note that the thresholds have to be calculated for every node, since the set of the continuous values for each node may differ from the root node.
 
+Optionally, we can use multple thresholds of a continuous attribute to split the set into more than three sub-sets. The problem of this option is that if we split the set at all the thresholds, then we will get the highest information gain. Since we choose the splitting which achieves the highest information gain, we always choose a continuous attribute with all the thresholds to split. This strategy leads to overfitting, and we do not want to do that. Quinlann \cite{quinlann1996} proposes the gain ratio criterion to prevent this issue. Fayyad and Irani \cite{fayyad1993} proposes MDLPC criterion based on the minimum description length principle.
+
 \item What is the first attribute that the algorithm will split the data on? What is its information gain?
 
 The information gain by the split of each attribute is computed as follows.
@@ -173,8 +175,8 @@ Same as threshold=47.5, which is 0.14449.
 0.94566 - \left[ \left( -\frac{6}{9} \log \frac{6}{9} -\frac{3}{9} \log \frac{3}{9} \right) \times \frac{9}{11} + 1.0 \times \frac{2}{11} \right]\\ = 0.94566 - 0.93315 = 0.01251
 \end{eqnarray*}
 \end{itemize}
-The attribute which achieves the highest information gain is "Pages" with 47.5 or 675 as the threshold, so we should use "Pages" as the first attribute to split, and the information gain is 0.14449.
-Note that if we split all the values of "Pages", then we will be able to completely separate the labels with the weighted averaged of the entropy = 0.0. However, this will be overfitting, and we do not want to do that.
+Here, note that I considered only a single split for a continuous attribute, "Pages". The attribute which achieves the highest information gain is "Pages" with 47.5 or 675 as the threshold, so we should use "Pages" as the first attribute to split, and the information gain is 0.14449.
+Note that if we split all the values of "Pages", then we will be able to completely separate the labels with the weighted averaged of the entropy = 0.0. However, this will be overfitting as I discussed earlier.
 
 \item Due to a computer error some of the training examples attributes were deleted! Revise the decision tree training algorithm to deal with missing values in the training data.
 
@@ -185,7 +187,7 @@ Another option is to use the probability distribution according to the training 
 
 \item Decision Tree Implementation
 
-I implemented the decision tree algorithm using the second option for the missing values. With regard to the continuous values, for every node, I computed the expected information gain for each cut point discussed above in addition to the discrete attributes, and choose the best one which achieves the highest information gain. Also, the validation data was used to find the best maxDepth, changing from 0 to 20. Finally, the performance of the resulting decision tree was measured on the test data. Please refer to the attached source code for details.
+I implemented the decision tree algorithm using the second option for the missing values. With regard to the continuous values, I used only a single split. For every node, I computed the expected information gain for each cut point of the continuous attributes in addition to the discrete attributes, and choose the best one which achieves the highest information gain. Also, the validation data was used to find the best maxDepth, changing from 0 to 10. Finally, the performance of the resulting decision tree was measured on the test data. Please refer to the attached source code for details.
 
 \begin{table}[htb]
 \begin{center}
@@ -222,6 +224,8 @@ This poor performance is caused by the different distribution of values in the f
 
 \begin{thebibliography}{9}
 \bibitem{fayyad1992} Fayyad, Usama M. and Irani, Keki B. 1992. On the Handling of Continuous-Valued Attributes in Decision Tree Generation. {\it Machine Learning}, 8, pp. 87 - 102.
+\bibitem{fayyad1993} Fayyad, Usama M. and Irani, Keki B. 1993. Multi-Interval Discretization of Continuous-Valued Attributes for Classification Learning. {\it Machine Learning}, 2, pp. 1022 - 1027.
+\bibitem{quinlann1996} Quinlann, J. R. 1996. Improved Use of Continuous Attributes in C4.5. {\it Journal of Artificial Intelligence Research}, 4, pp. 77 - 90.
 \end{thebibliography}
 
 \end{document}
