@@ -42,6 +42,9 @@ class TreeNode:
 			elif self.label == "-": return -1.0
 			else: return 0.0
 		elif self.attr_type == "B":
+			if self.attr_index >= len(example.row):
+				print("ERROR")
+
 			if example.row[self.attr_index] == "?":
 				ret = 0.0
 				for value, childNode in self.childNodes.iteritems():
@@ -128,6 +131,9 @@ def DecisionTreeBounded(maxDepth):
 	for i in xrange(len(predicted_labels)):
 		labels[2].append(tests[i].label)
 		labels[3].append(predicted_labels[i])
+
+	#for i in xrange(len(labels[2])):
+	#	print(str(i) + ": " + str(labels[2][i]) + "," + str(labels[3][i]))
 
 	return labels
 
@@ -419,7 +425,6 @@ def readData(filename):
 	f = open(filename).read()
 	examples = []
 	for line in f.split('\r'):
-		if line == "": continue
 		row = line.split('\t')
 		label = row[len(row) - 1]
 		row.pop(len(row) - 1)
@@ -428,6 +433,7 @@ def readData(filename):
 	return examples
 
 if __name__ == '__main__':
-	labels = DecisionTree()
+	#labels = DecisionTree()
+	labels = DecisionTreeBounded(3)
 	Check.eval(labels[0], labels[1], labels[2], labels[3])
 

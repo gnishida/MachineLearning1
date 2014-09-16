@@ -42,6 +42,9 @@ class TreeNode:
 			elif self.label == "-": return -1.0
 			else: return 0.0
 		elif self.attr_type == "B":
+			if self.attr_index >= len(example.row):
+				print("ERROR")
+
 			if example.row[self.attr_index] == "?":
 				ret = 0.0
 				for value, childNode in self.childNodes.iteritems():
@@ -419,7 +422,6 @@ def readData(filename):
 	f = open(filename).read()
 	examples = []
 	for line in f.split('\r'):
-		if line == "": continue
 		row = line.split('\t')
 		label = row[len(row) - 1]
 		row.pop(len(row) - 1)

@@ -42,6 +42,12 @@ class TreeNode:
 			elif self.label == "-": return -1.0
 			else: return 0.0
 		elif self.attr_type == "B":
+			if self.attr_index < 0:
+				print("ERROR")
+
+			if self.attr_index >= len(example.row):
+				print("ERROR")
+
 			if example.row[self.attr_index] == "?":
 				ret = 0.0
 				for value, childNode in self.childNodes.iteritems():
@@ -128,6 +134,9 @@ def DecisionTreeBounded(maxDepth):
 	for i in xrange(len(predicted_labels)):
 		labels[2].append(tests[i].label)
 		labels[3].append(predicted_labels[i])
+
+	for i in xrange(len(labels[2])):
+		print(str(i) + ": " + str(labels[2][i]) + "," + str(labels[3][i]))
 
 	return labels
 
