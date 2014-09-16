@@ -1,6 +1,8 @@
 import math
 import Check
 
+maxSplitForContinuous = 2
+
 # Example
 class Example:
 	def __init__(self, row, label, weight):
@@ -40,9 +42,6 @@ class TreeNode:
 			elif self.label == "-": return -1.0
 			else: return 0.0
 		elif self.attr_type == "B":
-			if self.attr_index >= len(example.row):
-				print("ERROR")
-
 			if example.row[self.attr_index] == "?":
 				ret = 0.0
 				for value, childNode in self.childNodes.iteritems():
@@ -57,10 +56,15 @@ class TreeNode:
 					ret += childNode.predict(example) / float(len(self.childNodes))
 				return ret
 			else:
-				if float(example.row[self.attr_index]) < self.attr_th:
-					return self.childNodes["<"].predict(example)
-				else:
-					return self.childNodes[">"].predict(example)
+				for i in xrange(len(self.attr_th)):
+					if float(example.row[self.attr_index]) < self.attr_th[i]:
+						return self.childNodes[str(i)].predict(example)
+				return self.childNodes[str(len(self.attr_th))].predict(example)
+
+				#if float(example.row[self.attr_index]) < self.attr_th:
+				#	return self.childNodes["<"].predict(example)
+				#else:
+				#	return self.childNodes[">"].predict(example)
 
 def DecisionTree():
 	#TODO: Your code starts from here.
@@ -83,7 +87,7 @@ def DecisionTree():
 	# read validation data
 	validations = readData("validation.txt")
 
-	maxDepth = findBestMaxDepth(attrs, examples, validations)
+	maxDepth = findBestMaxDepth(attrs, examples, validations, 10)
 
 	print("best maxDepth: " + str(maxDepth))
 
@@ -127,7 +131,7 @@ def DecisionTreeBounded(maxDepth):
 
 	return labels
 
-def findBestMaxDepth(attrs, examples, validations):
+def findBestMaxDepth(attrs, examples, validations, maxMaxDepth):
 	# ground truth labels of validation data
 	vali_labels = []
 	for v in validations:
@@ -135,7 +139,7 @@ def findBestMaxDepth(attrs, examples, validations):
 
 	max_accuracy = 0.0
 	best_maxDepth = -1
-	for i in xrange(20):
+	for i in xrange(maxMaxDepth):
 		rootNode = buildDecisionTree(attrs, examples, i)
 
 		# predict labels for validation data
@@ -240,26 +244,58 @@ def findBestAttribute(examples, attrs):
 
 	max_gain = 0
 	attr_index = -1
-	attr_th = 0
+	attr_th = []
 
 	for index, type in attrs.iteritems():
 		if type == "B":
-			splitted_examples = split(examples, index, type, 0)
+			splitted_examples = split(examples, index, type, [])
 			e2 = totalEntropy(splitted_examples)
 			gain = e - e2
 			if gain > max_gain:
 				max_gain = gain
 				attr_index = index
+
 		else:
 			thresholds = findThresholds(examples, index)
+
+			# use only one threshold
 			for threshold in thresholds:
-				splitted_examples = split(examples, index, type, threshold)
+				splitted_examples = split(examples, index, type, [threshold])
 				e2 = totalEntropy(splitted_examples)
 				gain = e - e2
+
 				if gain > max_gain:
 					max_gain = gain
 					attr_index = index
-					attr_th = threshold
+					attr_th = [threshold]
+
+			# use two thresholds
+			if maxSplitForContinuous > 2:
+				for threshold1 in thresholds:
+					for threshold2 in thresholds:
+						if threshold2 <= threshold1: continue
+						splitted_examples = split(examples, index, type, [threshold1, threshold2])
+						e2 = totalEntropy(splitted_examples)
+						gain = e - e2
+						if gain > max_gain:
+							max_gain = gain
+							attr_index = index
+							attr_th = [threshold]
+
+			# use three thresholds
+			if maxSplitForContinuous > 3:
+				for threshold1 in thresholds:
+					for threshold2 in thresholds:
+						if threshold2 <= threshold1: continue
+						for threshold3 in thresholds:
+							if threshold3 <= threshold2: continue
+							splitted_examples = split(examples, index, type, [threshold1, threshold2, threshold3])
+							e2 = totalEntropy(splitted_examples)
+							gain = e - e2
+							if gain > max_gain:
+								max_gain = gain
+								attr_index = index
+								attr_th = [threshold]
 
 	return attr_index, attr_th
 
@@ -310,15 +346,25 @@ def split(examples, attr_index, attr_type, attr_th):
 			splitted_examples[value].append(example)
 			total_num += 1
 	else:
-		splitted_examples["<"] = []
-		splitted_examples[">"] = []
+		for i in xrange(len(attr_th) + 1):
+			splitted_examples[str(i)] = []
+		#splitted_examples["<"] = []
+		#splitted_examples[">"] = []
 		for example in examples:
 			if example.row[attr_index] == "?": continue
 			value = float(example.row[attr_index])
-			if value < attr_th:
-				splitted_examples["<"].append(example)
-			else:
-				splitted_examples[">"].append(example)
+
+			for i in xrange(len(attr_th)):
+				if value < attr_th[i]:
+					splitted_examples[str(i)].append(example)
+					total_num += 1
+					continue
+			splitted_examples[str(len(attr_th))].append(example)
+
+			#if value < attr_th:
+			#	splitted_examples["<"].append(example)
+			#else:
+			#	splitted_examples[">"].append(example)
 			total_num += 1
 
 	# compute the proportion of the subsets
@@ -373,6 +419,7 @@ def readData(filename):
 	f = open(filename).read()
 	examples = []
 	for line in f.split('\r'):
+		if line == "": continue
 		row = line.split('\t')
 		label = row[len(row) - 1]
 		row.pop(len(row) - 1)
@@ -383,3 +430,4 @@ def readData(filename):
 if __name__ == '__main__':
 	labels = DecisionTree()
 	Check.eval(labels[0], labels[1], labels[2], labels[3])
+

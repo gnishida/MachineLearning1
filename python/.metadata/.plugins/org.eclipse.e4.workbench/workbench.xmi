@@ -103,7 +103,7 @@
               <tags>newtablook</tags>
               <children xsi:type="advanced:Placeholder" xmi:id="_3--aIzXXEeSLtLOrZEevaQ" elementId="org.python.pydev.navigator.view" ref="_3-4TgDXXEeSLtLOrZEevaQ"/>
             </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_3--aJDXXEeSLtLOrZEevaQ" containerData="7947" selectedElement="_3--aJTXXEeSLtLOrZEevaQ">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_3--aJDXXEeSLtLOrZEevaQ" containerData="7947" selectedElement="_3--aJjXXEeSLtLOrZEevaQ">
               <children xsi:type="advanced:Placeholder" xmi:id="_3--aJTXXEeSLtLOrZEevaQ" elementId="org.eclipse.ui.editorss" containerData="5736" ref="_zDjecDXWEeSULKolmFQTnw"/>
               <children xsi:type="basic:PartStack" xmi:id="_3--aJjXXEeSLtLOrZEevaQ" elementId="bottom" containerData="4264" selectedElement="_3--aKDXXEeSLtLOrZEevaQ">
                 <tags>newtablook</tags>
@@ -143,7 +143,7 @@
         <tags>EditorStack</tags>
         <tags>active</tags>
         <children xsi:type="basic:Part" xmi:id="_6Kjg4DXXEeSLtLOrZEevaQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Solution" iconURI="platform:/plugin/org.python.pydev/icons/python_file.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;Solution.py&quot; partName=&quot;Solution&quot; title=&quot;Solution&quot; tooltip=&quot;DecisionTree/Solution.py&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/DecisionTree/Solution.py&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;3834&quot; selectionTopPixel=&quot;1770&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;Solution.py&quot; partName=&quot;Solution&quot; title=&quot;Solution&quot; tooltip=&quot;DecisionTree/Solution.py&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/DecisionTree/Solution.py&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;72&quot; selectionOffset=&quot;1180&quot; selectionTopPixel=&quot;375&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.python.pydev.editor.PythonEditor</tags>
           <tags>removeOnHide</tags>
@@ -235,7 +235,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y-h0gjXWEeSULKolmFQTnw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_Mgujtz3rEeStoOIwlDAdXg" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_RvTQJzXWEeSULKolmFQTnw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Hbs3tz34EeSFGpLXirgKPA" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_RvTQJzXWEeSULKolmFQTnw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y-h0gzXWEeSULKolmFQTnw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -256,7 +256,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y-n7IDXWEeSULKolmFQTnw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_Mg0qWT3rEeStoOIwlDAdXg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_RvNJBjXWEeSULKolmFQTnw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Hb2ouT34EeSFGpLXirgKPA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_RvNJBjXWEeSULKolmFQTnw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y-n7ITXWEeSULKolmFQTnw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
